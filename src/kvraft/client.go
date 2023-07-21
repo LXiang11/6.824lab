@@ -1,13 +1,19 @@
 package kvraft
 
-import "6.5840/labrpc"
-import "crypto/rand"
-import "math/big"
+import (
+	"crypto/rand"
+	"math/big"
+	"sync/atomic"
 
+	"6.5840/labrpc"
+)
 
 type Clerk struct {
 	servers []*labrpc.ClientEnd
 	// You will have to modify this struct.
+	currentleader int
+	ClerkID       int64
+	SeqID         int64
 }
 
 func nrand() int64 {
@@ -20,8 +26,30 @@ func nrand() int64 {
 func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck := new(Clerk)
 	ck.servers = servers
+	ck.ClerkID = nrand()
+	ck.SeqID = 0
 	// You'll have to add code here.
+	DPrintf("clerk get start!\n")
 	return ck
+}
+
+func (ck *Clerk) GetLeader() int {
+	getRaftStateArgs := GetRaftStateArgs{}
+	getRaftStateReply := GetRaftStateReply{}
+	ok := ck.servers[ck.currentleader].Call("KVServer.GetRaftState", &getRaftStateArgs, &getRaftStateReply)
+	if ok && getRaftStateReply.IsLeader {
+		return ck.currentleader
+	}
+	for i := range ck.servers {
+		ok := ck.servers[i].Call("KVServer.GetRaftState", &getRaftStateArgs, &getRaftStateReply)
+		if !ok {
+			continue
+		}
+		if getRaftStateReply.IsLeader {
+			return i
+		}
+	}
+	return ck.currentleader
 }
 
 // fetch the current value for a key.
@@ -37,7 +65,21 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 func (ck *Clerk) Get(key string) string {
 
 	// You will have to modify this function.
-	return ""
+	getArgs := GetArgs{key, ck.ClerkID, atomic.AddInt64(&ck.SeqID, 1)}
+	getReply := GetReply{}
+
+	for {
+		// ck.currentleader = ck.GetLeader()
+		DPrintf("get: key: %v, ClerkID: %v, SeqID: %v\n", key, getArgs.ClerkID, getArgs.SeqID)
+
+		ck.servers[ck.currentleader].Call("KVServer.Get", &getArgs, &getReply)
+
+		if getReply.Err == OK {
+			return getReply.Value
+		}
+
+		ck.currentleader = (ck.currentleader + 1) % len(ck.servers)
+	}
 }
 
 // shared by Put and Append.
@@ -50,6 +92,21 @@ func (ck *Clerk) Get(key string) string {
 // arguments. and reply must be passed as a pointer.
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 	// You will have to modify this function.
+	putAppendArgs := PutAppendArgs{key, value, op, ck.ClerkID, atomic.AddInt64(&ck.SeqID, 1)}
+	putAppendReply := PutAppendReply{}
+
+	for {
+		// ck.currentleader = ck.GetLeader()
+		DPrintf("putappend: key: %v, value: %v, op: %v, ClerkID: %v, SeqID: %v\n", key, value, op, putAppendArgs.ClerkID, putAppendArgs.SeqID)
+
+		ck.servers[ck.currentleader].Call("KVServer.PutAppend", &putAppendArgs, &putAppendReply)
+
+		if putAppendReply.Err == OK {
+			return
+		}
+
+		ck.currentleader = (ck.currentleader + 1) % len(ck.servers)
+	}
 }
 
 func (ck *Clerk) Put(key string, value string) {
