@@ -1,6 +1,7 @@
 package kvraft
 
 import (
+	"bytes"
 	"log"
 	"sync"
 	"sync/atomic"
@@ -37,7 +38,6 @@ type Op struct {
 	Optype  int
 	Key     string
 	Value   string
-	Opindex int
 	ClerkID int64
 	SeqlID  int64
 }
@@ -62,26 +62,52 @@ type KVServer struct {
 	//每种操作设置一个管道，等待raftapply了这个操作后再执行
 	waitreply map[OpIdentifier]chan string
 
-	//记录客户端发来的请求数
-	opindex int
+	//raft已执行的最大index
+	maxexcuteindex int
+
+	//当前快照的最后一个日志，用于判断哪个快照更新
+	// snapshotlastindex int
+	// snapshotlastterm  int
+
+	persister *raft.Persister
 
 	//每个命令唯一标识
 	ClerklastSeqID map[int64]int64
 }
 
-func (kv *KVServer) GetRaftState(args *GetRaftStateArgs, reply *GetRaftStateReply) {
-	kv.mu.Lock()
-	_, reply.IsLeader = kv.rf.GetState()
-	kv.mu.Unlock()
+func (kv *KVServer) Snapshot() {
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+
+	e.Encode(kv.store)
+	e.Encode(kv.ClerklastSeqID)
+	e.Encode(kv.maxexcuteindex)
+
+	snapshot := w.Bytes()
+	kv.rf.Snapshot(kv.maxexcuteindex, snapshot)
+}
+
+func (kv *KVServer) ReadSnapshot(snapshot []byte) {
+	r := bytes.NewBuffer(snapshot)
+	d := labgob.NewDecoder(r)
+	var store map[string]string
+	var ClerklastSeqID map[int64]int64
+	var maxexcuteindex int
+	if d.Decode(&store) != nil ||
+		d.Decode(&ClerklastSeqID) != nil ||
+		d.Decode(&maxexcuteindex) != nil {
+		//   error...
+	} else {
+		kv.store = store
+		kv.ClerklastSeqID = ClerklastSeqID
+		kv.maxexcuteindex = maxexcuteindex
+	}
 }
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
 	DPrintf("1 server%v get %v", kv.me, args.Key)
-	kv.mu.Lock()
-	op := Op{0, args.Key, "", kv.opindex, args.ClerkID, args.SeqID}
-	kv.opindex++
-	kv.mu.Unlock()
+	op := Op{0, args.Key, "", args.ClerkID, args.SeqID}
 	index, term, isleader := kv.rf.Start(op)
 	if !isleader {
 		reply.Err = ErrWrongLeader
@@ -113,15 +139,12 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	// Your code here.
 	// DPrintf("1 server%v putappend %v, value %v", kv.me, args.Key, args.Value)
-	kv.mu.Lock()
 	var op Op
 	if args.Op == "Put" {
-		op = Op{1, args.Key, args.Value, kv.opindex, args.ClerkID, args.SeqID}
+		op = Op{1, args.Key, args.Value, args.ClerkID, args.SeqID}
 	} else if args.Op == "Append" {
-		op = Op{2, args.Key, args.Value, kv.opindex, args.ClerkID, args.SeqID}
+		op = Op{2, args.Key, args.Value, args.ClerkID, args.SeqID}
 	}
-	kv.opindex++
-	kv.mu.Unlock()
 	index, term, isleader := kv.rf.Start(op)
 	if !isleader {
 		reply.Err = ErrWrongLeader
@@ -200,28 +223,53 @@ func (kv *KVServer) applyCommandOnServer(op Op) string {
 func (kv *KVServer) applyCommand() {
 	for kv.killed() == false {
 		for m := range kv.applyCh {
-			DPrintf("applycmd: key: %v, value: %v, type: %v, opindex: %v, me: %v\n",
-				m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, m.Command.(Op).Opindex, kv.me)
 			if m.CommandValid {
+				DPrintf("applycmd: key: %v, value: %v, type: %v, me: %v\n",
+					m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, kv.me)
 				//类型断言
 				op := m.Command.(Op)
 				// DPrintf("1 server%v applycmd key: %v, value: %v, type: %v, opindex: %v\n",
 				// 	kv.me, m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, m.Command.(Op).Opindex)
 				kv.mu.Lock()
+				if kv.maxexcuteindex >= m.CommandIndex {
+					kv.mu.Unlock()
+					continue
+				}
 				response := kv.applyCommandOnServer(op)
-				kv.opindex = int(max(int64(kv.opindex), int64(op.Opindex)))
 				currentterm, isleader := kv.rf.GetState()
 				waitchannel, waitok := kv.waitreply[OpIdentifier{m.CommandIndex, currentterm}]
+				kv.maxexcuteindex = int(max(int64(m.CommandIndex), int64(kv.maxexcuteindex)))
+				// fmt.Println("me", kv.me, "raftstatesize: ", kv.persister.RaftStateSize())
+				if kv.maxraftstate > -1 && int(float64(kv.maxraftstate)*0.8) < kv.persister.RaftStateSize() {
+					kv.Snapshot()
+				}
 				if !waitok || !isleader {
 					kv.mu.Unlock()
 					continue
 				}
 				waitchannel <- response
+
 				kv.mu.Unlock()
 				// DPrintf("11 server%v applycmd key: %v, value: %v, type: %v, opindex: %v\n",
 				// 	kv.me, m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, m.Command.(Op).Opindex)
 			} else if m.SnapshotValid {
-
+				kv.mu.Lock()
+				// if kv.snapshotlastterm > m.SnapshotTerm {
+				// 	kv.mu.Unlock()
+				// 	continue
+				// } else if kv.snapshotlastterm == m.SnapshotTerm {
+				// 	if kv.snapshotlastindex >= m.SnapshotIndex {
+				// 		kv.mu.Unlock()
+				// 		continue
+				// 	}
+				// } else
+				if kv.maxexcuteindex >= m.SnapshotIndex {
+					kv.mu.Unlock()
+					continue
+				}
+				//更新状态
+				kv.ReadSnapshot(m.Snapshot)
+				kv.mu.Unlock()
 			}
 		}
 	}
@@ -255,6 +303,8 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.store = make(map[string]string)
 	kv.waitreply = make(map[OpIdentifier]chan string)
 	kv.ClerklastSeqID = make(map[int64]int64)
+	kv.persister = persister
+	kv.ReadSnapshot(persister.ReadSnapshot())
 
 	// You may need initialization code here.
 	go kv.applyCommand()

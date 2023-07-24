@@ -425,7 +425,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 		if args.LogEntryValid {
 			//一切和rf.log相关的代码都要加上偏移
 			if args.PrevLogIndex < rf.snapshotlastindex {
-				fmt.Println("PrevLogIndex <= snapshotlastindex", "me", rf.me, "leader", args.Leader)
+				// fmt.Println("PrevLogIndex <= snapshotlastindex", "me", rf.me, "leader", args.Leader)
 				reply.FirstLogIndex = -1
 				return
 			} else if args.PrevLogIndex <= rf.snapshotlastindex+len(rf.log) {
@@ -777,7 +777,7 @@ func (rf *Raft) applylog() {
 		rf.lastApplied = max(rf.lastApplied, commitIndex)
 		// rf.persist()
 		rf.mu.Unlock()
-		time.Sleep(time.Duration(20) * time.Millisecond)
+		time.Sleep(time.Duration(10) * time.Millisecond)
 	}
 }
 

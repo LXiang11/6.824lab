@@ -33,25 +33,6 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	return ck
 }
 
-func (ck *Clerk) GetLeader() int {
-	getRaftStateArgs := GetRaftStateArgs{}
-	getRaftStateReply := GetRaftStateReply{}
-	ok := ck.servers[ck.currentleader].Call("KVServer.GetRaftState", &getRaftStateArgs, &getRaftStateReply)
-	if ok && getRaftStateReply.IsLeader {
-		return ck.currentleader
-	}
-	for i := range ck.servers {
-		ok := ck.servers[i].Call("KVServer.GetRaftState", &getRaftStateArgs, &getRaftStateReply)
-		if !ok {
-			continue
-		}
-		if getRaftStateReply.IsLeader {
-			return i
-		}
-	}
-	return ck.currentleader
-}
-
 // fetch the current value for a key.
 // returns "" if the key does not exist.
 // keeps trying forever in the face of all other errors.
