@@ -229,12 +229,16 @@ func (rf *Raft) Snapshot(index int, snapshot []byte) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 	index--
+	if index <= rf.snapshotlastindex {
+		return
+	}
 	rf.snapshotdata = snapshot
+	// fmt.Println("snapshot", "me", rf.me, "leader", rf.currentleader, "index", index, "snapshotlastindex", rf.snapshotlastindex, "term", rf.currentTerm)
 	rf.snapshotlastterm = rf.log[index-rf.snapshotlastindex-1].Term
 	rf.log = rf.log[index-rf.snapshotlastindex:]
 	rf.snapshotlastindex = index
 	rf.persist()
-	// fmt.Println("snapshot", "me", rf.me, "leader", rf.currentleader, "index", index, "term", rf.currentTerm)
+
 }
 
 type InstallSnapshotArgs struct {

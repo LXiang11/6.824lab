@@ -1,6 +1,7 @@
 package shardctrler
 
 import (
+	"bytes"
 	"sort"
 	"sync"
 	"sync/atomic"
@@ -20,6 +21,8 @@ type ShardCtrler struct {
 	// Your data here.
 
 	configs []Config // indexed by config num
+
+	maxraftstate int // snapshot if log grows this big
 
 	dead int32
 
@@ -57,6 +60,35 @@ func max(a int64, b int64) int64 {
 		return b
 	} else {
 		return a
+	}
+}
+
+func (sc *ShardCtrler) Snapshot() {
+	w := new(bytes.Buffer)
+	e := labgob.NewEncoder(w)
+
+	e.Encode(sc.configs)
+	e.Encode(sc.ClerklastSeqID)
+	e.Encode(sc.maxexcuteindex)
+
+	snapshot := w.Bytes()
+	sc.rf.Snapshot(sc.maxexcuteindex, snapshot)
+}
+
+func (sc *ShardCtrler) ReadSnapshot(snapshot []byte) {
+	r := bytes.NewBuffer(snapshot)
+	d := labgob.NewDecoder(r)
+	var configs []Config
+	var ClerklastSeqID map[int64]int64
+	var maxexcuteindex int
+	if d.Decode(&configs) != nil ||
+		d.Decode(&ClerklastSeqID) != nil ||
+		d.Decode(&maxexcuteindex) != nil {
+		//   error...
+	} else {
+		sc.configs = configs
+		sc.ClerklastSeqID = ClerklastSeqID
+		sc.maxexcuteindex = maxexcuteindex
 	}
 }
 
@@ -356,9 +388,9 @@ func (sc *ShardCtrler) applyCommand() {
 				waitchannel, waitok := sc.waitreply[OpIdentifier{m.CommandIndex, currentterm}]
 				sc.maxexcuteindex = int(max(int64(m.CommandIndex), int64(sc.maxexcuteindex)))
 				// fmt.Println("me", sc.me, "raftstatesize: ", sc.persister.RaftStateSize())
-				// if sc.maxraftstate > -1 && int(float64(sc.maxraftstate)*0.8) < sc.persister.RaftStateSize() {
-				// 	sc.Snapshot()
-				// }
+				if sc.maxraftstate > -1 && int(float64(sc.maxraftstate)*0.8) < sc.persister.RaftStateSize() {
+					sc.Snapshot()
+				}
 				if !waitok || !isleader {
 					sc.mu.Unlock()
 					continue
@@ -401,6 +433,8 @@ func StartServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persister)
 	sc.persister = persister
 	sc.waitreply = make(map[OpIdentifier]chan Config)
 	sc.ClerklastSeqID = make(map[int64]int64)
+	sc.maxraftstate = 1000
+	sc.ReadSnapshot(persister.ReadSnapshot())
 	go sc.applyCommand()
 
 	return sc
