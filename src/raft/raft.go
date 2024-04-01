@@ -75,6 +75,8 @@ func max(a int, b int) int {
 	}
 }
 
+const RPCtimeout = 500
+
 // A Go object implementing a single Raft peer.
 type Raft struct {
 	mu        sync.Mutex          // Lock to protect shared access to this peer's state
@@ -88,7 +90,11 @@ type Raft struct {
 	// Look at the paper's Figure 2 for a description of what
 	// state a Raft server must maintain.
 
-	timer int
+	timer int32
+
+	heartbeatch        chan int
+	electiontimeout    int32
+	isheartbeattimeout []bool
 
 	//当前快照最后一个条目的index和term
 	snapshotlastindex int
@@ -361,14 +367,15 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	}
 	//已经投过票或者已过时
 	//这个term应该如何更改？
-	if rf.currentTerm >= otherterm {
+	if rf.currentTerm > otherterm {
 		reply.IsVoted = false
 		reply.Term = rf.currentTerm
 	} else if rf.currentTerm < otherterm {
 		rf.currentTerm = otherterm
 		rf.votedFor = -1
 	}
-	if rf.votedFor != -1 {
+	//这个判断是有意义的，当收到更新的term请求时，满足投票条件就要投票。如果此term内已经投过票则不投。
+	if rf.votedFor != -1 && rf.votedFor != candidate {
 		reply.IsVoted = false
 	}
 	//同一term内只投一票
@@ -376,13 +383,16 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 		// fmt.Println("vote", candidate, "mylogterm", mylogterm, "otherlogterm", otherlogterm, "term", rf.currentTerm, "me", rf.me)
 		rf.currentTerm = otherterm
 		// rf.currentleader = candidate
-		// rf.leaderislive = true
+		//这里应不应该设置为不存活呢
+		//不应该，会出错，为什么？
+		// rf.leaderislive = false
 		rf.currentleader = -1
 		rf.votedFor = candidate
-		rf.timer = 0
+		atomic.StoreInt32(&rf.timer, 0)
+		rf.heartbeatch <- candidate
 	}
-	rf.mu.Unlock()
-	rf.mu.Lock()
+	// rf.mu.Unlock()
+	// rf.mu.Lock()
 	rf.persist()
 }
 
@@ -415,7 +425,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 			rf.currentTerm = args.Term
 			rf.currentleader = args.Leader
 			rf.leaderislive = true
-			rf.timer = 0
+			atomic.StoreInt32(&rf.timer, 0)
 			// fmt.Println("to leader", rf.currentleader, "to term", rf.currentTerm, "yuan term", orterm, "me", rf.me)
 		}
 	} else {
@@ -425,6 +435,7 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 
 	if args.Leader == rf.currentleader {
 		rf.leaderislive = true
+		rf.heartbeatch <- args.Leader
 
 		if args.LogEntryValid {
 			//一切和rf.log相关的代码都要加上偏移
@@ -470,8 +481,8 @@ func (rf *Raft) AppendEntry(args *AppendEntryArgs, reply *AppendEntryReply) {
 			rf.commitIndex = min(args.LeaderCommit, len(rf.log)+rf.snapshotlastindex)
 		}
 	}
-	rf.mu.Unlock()
-	rf.mu.Lock()
+	// rf.mu.Unlock()
+	// rf.mu.Lock()
 	rf.persist()
 }
 
@@ -529,8 +540,8 @@ func (rf *Raft) sendInstallSnapshot(server int, args *InstallSnapshotArgs, reply
 func (rf *Raft) setToCandidate() {
 	rf.currentleader = -1
 	rf.leaderislive = false
-	rf.mu.Unlock()
-	rf.mu.Lock()
+	// rf.mu.Unlock()
+	// rf.mu.Lock()
 	rf.persist()
 }
 
@@ -566,8 +577,8 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	rf.log = append(rf.log, LogEntry{rf.currentTerm, command})
 	index = rf.snapshotlastindex + len(rf.log) + 1
 	term = rf.currentTerm
-	rf.mu.Unlock()
-	rf.mu.Lock()
+	// rf.mu.Unlock()
+	// rf.mu.Lock()
 	rf.persist()
 
 	return index, term, isLeader
@@ -585,6 +596,12 @@ func (rf *Raft) Start(command interface{}) (int, int, bool) {
 func (rf *Raft) Kill() {
 	atomic.StoreInt32(&rf.dead, 1)
 	// Your code here, if desired.
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+	rf.leaderislive = false
+	rf.currentleader = -1
+	//关闭会导致向已关闭管道写入恐慌
+	// close(rf.heartbeatch)
 }
 
 func (rf *Raft) killed() bool {
@@ -609,6 +626,11 @@ func (rf *Raft) initleader() {
 	//leader期间周期发送
 	for i := range rf.peers {
 		if i == rf.me {
+			go func() {
+				for ; rf.currentleader == rf.me; time.Sleep(time.Duration(50) * time.Millisecond) {
+					rf.heartbeatch <- rf.me
+				}
+			}()
 			continue
 		}
 		go func(server int) {
@@ -621,17 +643,52 @@ func (rf *Raft) initleader() {
 				appendEntryArgs := AppendEntryArgs{false, rf.currentTerm, rf.me, 0, 0, nil, rf.commitIndex}
 				appendEntryReply := AppendEntryReply{rf.currentTerm, 0, false}
 				rf.mu.Unlock()
-				rf.sendAppendEntry(server, &appendEntryArgs, &appendEntryReply)
+				// fmt.Println(rf.me, "send heartbeat to", server, "term", rf.currentTerm)
+				//由于RPC超时时间设置的太长，可能导致旧leader根本无法知道自己处于少数区，所以当发现过半都超时时，应该认为自己处于少数区，转为candidate
+				heartbeattimeoutch := make(chan bool)
+				go func() {
+					if rf.sendAppendEntry(server, &appendEntryArgs, &appendEntryReply) {
+						heartbeattimeoutch <- true
+					}
+					close(heartbeattimeoutch)
+				}()
+				select {
+				case <-heartbeattimeoutch:
+					rf.isheartbeattimeout[server] = false
+				case <-time.After(time.Duration(RPCtimeout) * time.Millisecond):
+					rf.isheartbeattimeout[server] = true
+				}
 				rf.mu.Lock()
 				if appendEntryReply.Term > rf.currentTerm {
 					rf.currentTerm = appendEntryReply.Term
 					rf.setToCandidate()
 				}
 				rf.mu.Unlock()
-				time.Sleep(time.Duration(40) * time.Millisecond)
+				time.Sleep(time.Duration(50) * time.Millisecond)
 			}
 		}(i)
 	}
+	//检查是否过半心跳超时
+	go func() {
+		for ; rf.currentleader == rf.me; time.Sleep(time.Duration(10) * time.Millisecond) {
+			rf.mu.Lock()
+			if rf.currentleader != rf.me {
+				rf.mu.Unlock()
+				break
+			}
+			count := 0
+			for _, v := range rf.isheartbeattimeout {
+				if v {
+					count++
+				}
+			}
+			if count > len(rf.peers)/2 {
+				// fmt.Println(rf.me, "过半心跳超时")
+				rf.setToCandidate()
+			}
+			rf.mu.Unlock()
+		}
+	}()
 	go func() {
 		for rf.currentleader == rf.me {
 			rf.mu.Lock()
@@ -680,7 +737,17 @@ func (rf *Raft) initleader() {
 						0, rf.snapshotdata, true}
 					installSnapshotReply := InstallSnapshotReply{rf.currentTerm}
 					rf.mu.Unlock()
-					if !rf.sendInstallSnapshot(server, &installSnapshotArgs, &installSnapshotReply) {
+					InstallSnapshottimeoutch := make(chan bool)
+					go func() {
+						if rf.sendInstallSnapshot(server, &installSnapshotArgs, &installSnapshotReply) {
+							InstallSnapshottimeoutch <- true
+						}
+						close(InstallSnapshottimeoutch)
+					}()
+					select {
+					case <-InstallSnapshottimeoutch:
+
+					case <-time.After(time.Duration(RPCtimeout) * time.Millisecond):
 						continue
 					}
 					rf.mu.Lock()
@@ -704,13 +771,19 @@ func (rf *Raft) initleader() {
 					rf.commitIndex}
 				appendEntryReply := AppendEntryReply{rf.currentTerm, 0, false}
 				rf.mu.Unlock()
-				// if curindex >= rf.nextIndex[server] {
-				if !rf.sendAppendEntry(server, &appendEntryArgs, &appendEntryReply) {
+				AppendEntrytimeoutch := make(chan bool)
+				go func() {
+					if rf.sendAppendEntry(server, &appendEntryArgs, &appendEntryReply) {
+						AppendEntrytimeoutch <- true
+					}
+					close(AppendEntrytimeoutch)
+				}()
+				select {
+				case <-AppendEntrytimeoutch:
+
+				case <-time.After(time.Duration(RPCtimeout) * time.Millisecond):
 					continue
 				}
-				// } else {
-				// 	continue
-				// }
 				rf.mu.Lock()
 				if appendEntryReply.Success {
 					if rf.nextIndex[server] < curindex+1 {
@@ -729,7 +802,17 @@ func (rf *Raft) initleader() {
 								0, rf.snapshotdata, true}
 							installSnapshotReply := InstallSnapshotReply{rf.currentTerm}
 							rf.mu.Unlock()
-							if !rf.sendInstallSnapshot(server, &installSnapshotArgs, &installSnapshotReply) {
+							InstallSnapshottimeoutch := make(chan bool)
+							go func() {
+								if rf.sendInstallSnapshot(server, &installSnapshotArgs, &installSnapshotReply) {
+									InstallSnapshottimeoutch <- true
+								}
+								close(InstallSnapshottimeoutch)
+							}()
+							select {
+							case <-InstallSnapshottimeoutch:
+
+							case <-time.After(time.Duration(RPCtimeout) * time.Millisecond):
 								continue
 							}
 							rf.mu.Lock()
@@ -745,15 +828,11 @@ func (rf *Raft) initleader() {
 					}
 					//如果需要发送快照，则等待快照发送完毕再继续执行
 				}
-				rf.mu.Unlock()
-				rf.mu.Lock()
 				rf.persist()
 				rf.mu.Unlock()
 			}
 		}(i)
 	}
-	rf.mu.Unlock()
-	rf.mu.Lock()
 	rf.persist()
 }
 
@@ -785,6 +864,96 @@ func (rf *Raft) applylog() {
 	}
 }
 
+func (rf *Raft) election(curTerm int) {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
+
+	if curTerm != rf.currentTerm {
+		// fmt.Println(rf.me, "no election term", rf.currentTerm)
+		return
+	}
+
+	rf.currentleader = -1
+	rf.votedFor = rf.me
+	rf.currentTerm++
+	// fmt.Println(rf.me, "start election term", rf.currentTerm)
+
+	go func(count int, curterm int) {
+		var cmu sync.Mutex
+		for i := 0; i < len(rf.peers); i++ {
+			if i == rf.me {
+				continue
+			}
+			go func(server int) {
+				rf.mu.Lock()
+				if rf.currentleader != -1 || curterm != rf.currentTerm {
+					rf.mu.Unlock()
+					return
+				}
+				myindex := rf.snapshotlastindex
+				lastterm := rf.snapshotlastterm
+				if len(rf.log) > 0 {
+					myindex = len(rf.log) + rf.snapshotlastindex
+					lastterm = rf.log[myindex-rf.snapshotlastindex-1].Term
+				}
+				requestVoteArgs := RequestVoteArgs{rf.currentTerm, rf.me, myindex, lastterm}
+				requestVoteReply := RequestVoteReply{rf.currentTerm, false}
+				rf.mu.Unlock()
+				if !rf.sendRequestVote(server, &requestVoteArgs, &requestVoteReply) {
+					return
+				}
+				if !requestVoteReply.IsVoted {
+					rf.mu.Lock()
+					if requestVoteReply.Term > rf.currentTerm {
+						rf.currentTerm = requestVoteReply.Term
+						rf.setToCandidate()
+					}
+					rf.mu.Unlock()
+					return
+				}
+				cmu.Lock()
+				count++
+				cmu.Unlock()
+			}(i)
+		}
+		for rf.currentleader == -1 && curterm == rf.currentTerm {
+			rf.mu.Lock()
+			//投票数过半且我还没成为leader则开始发送心跳
+			if count > len(rf.peers)/2 && rf.currentleader == -1 && curterm == rf.currentTerm {
+				// fmt.Println("start leader", rf.me, "term", rf.currentTerm)
+				rf.initleader()
+				rf.mu.Unlock()
+				break
+			}
+			rf.mu.Unlock()
+			time.Sleep(time.Duration(10) * time.Millisecond)
+		}
+	}(1, rf.currentTerm)
+	rf.persist()
+}
+
+func (rf *Raft) ticker1() {
+	// rf.lastsystime = time.Now()
+	for rf.killed() == false {
+
+		// Your code here (2A)
+		// Check if a leader election should be started.
+
+		//接收到心跳则重新开始计时
+		select {
+		case <-rf.heartbeatch:
+			// now := time.Now()
+			// fmt.Println(rf.me, "get heartbeat from", getfrom, "term", rf.currentTerm, "sub from last", now.UnixMilli()-rf.lastsystime.UnixMilli())
+			// rf.lastsystime = now
+		case <-time.After(time.Duration(rf.electiontimeout) * time.Millisecond):
+			// fmt.Println(rf.me, "timeout term", rf.currentTerm, "leader", rf.currentleader)
+			//如果触发超时，则先重置下一次超时的时间
+			atomic.StoreInt32(&rf.electiontimeout, 1000+(rand.Int31()%400))
+			go rf.election(rf.currentTerm)
+		}
+	}
+}
+
 func (rf *Raft) ticker() {
 	for rf.killed() == false {
 
@@ -799,10 +968,10 @@ func (rf *Raft) ticker() {
 				// rf.mu.Unlock()
 			}
 			// fmt.Println("leaderislive", "term", rf.currentTerm, "leader", rf.currentleader, "me", rf.me)
-			rf.mu.Unlock()
+			// rf.mu.Unlock()
 
-			time.Sleep(300 * time.Millisecond)
-			rf.mu.Lock()
+			// time.Sleep(300 * time.Millisecond)
+			// rf.mu.Lock()
 			// rf.mu.Unlock()
 		} else {
 			// rf.votecount = 1
@@ -873,13 +1042,14 @@ func (rf *Raft) ticker() {
 					if count > len(rf.peers)/2 && rf.currentleader == -1 && curterm == rf.currentTerm {
 						// fmt.Println("start leader", rf.me)
 						rf.initleader()
+						rf.mu.Unlock()
+						break
 					}
 					rf.mu.Unlock()
 					time.Sleep(time.Duration(10) * time.Millisecond)
 				}
 			}(1, rf.currentTerm)
 		}
-		// rf.mu.Lock()rf.mu.Unlock()
 		rf.mu.Unlock()
 		rf.mu.Lock()
 		rf.persist()
@@ -887,10 +1057,10 @@ func (rf *Raft) ticker() {
 
 		// pause for a random amount of time between 50 and 350
 		// milliseconds.
-		ms := 300 + (rand.Int63() % 150)
+		ms := 500 + (rand.Int63() % 150)
 		// ms := 50 + rand.Int63()%200
 		// time.Sleep(time.Duration(ms) * time.Millisecond)
-		for rf.timer = 0; rf.timer < int(ms); rf.timer++ {
+		for atomic.StoreInt32(&rf.timer, 0); rf.timer < int32(ms); atomic.AddInt32(&rf.timer, 1) {
 			time.Sleep(time.Millisecond)
 		}
 		//不应该置为-1，可能会出现该term投多次票的情况
@@ -919,6 +1089,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.persister = persister
 	rf.me = me
 	rf.applyCh = applyCh
+	rf.heartbeatch = make(chan int, 10)
+	rf.isheartbeattimeout = make([]bool, len(rf.peers))
 	// rf.nextIndex = make([]int, len(rf.peers))
 	// rf.matchIndex = make([]int, len(rf.peers))
 	// rf.commitIndex = -1
@@ -954,7 +1126,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	// rf.mu.Unlock()
 
 	// start ticker goroutine to start elections
-	go rf.ticker()
+	// go rf.ticker()
+	go rf.ticker1()
 	go rf.applylog()
 
 	return rf
