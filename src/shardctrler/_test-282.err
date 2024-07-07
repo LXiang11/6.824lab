@@ -1,0 +1,1140 @@
+2024/06/24 15:20:10 0 restart snapshotlastindex 0 loglen 0
+2024/06/24 15:20:10 1 restart snapshotlastindex 0 loglen 0
+2024/06/24 15:20:10 1 timeout term 0 leader -1
+2024/06/24 15:20:10 0 timeout term 0 leader -1
+2024/06/24 15:20:10 2 restart snapshotlastindex 0 loglen 0
+2024/06/24 15:20:10 0 start election term 1
+2024/06/24 15:20:10 2 timeout term 0 leader -1
+2024/06/24 15:20:10 2 start election term 1
+2024/06/24 15:20:10 0 recive vote request 2 other term 1 my term 1
+2024/06/24 15:20:10 1 start election term 1
+2024/06/24 15:20:10 2 recive vote request 1 other term 1 my term 1
+2024/06/24 15:20:10 1 recive vote request 2 other term 1 my term 1
+2024/06/24 15:20:10 0 recive vote request 1 other term 1 my term 1
+2024/06/24 15:20:10 1 recive vote request 0 other term 1 my term 1
+2024/06/24 15:20:10 2 recive vote request 0 other term 1 my term 1
+2024/06/24 15:20:11 1 timeout term 1 leader -1
+2024/06/24 15:20:11 1 start election term 2
+2024/06/24 15:20:11 2 recive vote request 1 other term 2 my term 1
+2024/06/24 15:20:11 2 vote 1 mylogterm 0 otherlogterm 0 term 2
+2024/06/24 15:20:11 0 recive vote request 1 other term 2 my term 1
+2024/06/24 15:20:11 0 vote 1 mylogterm 0 otherlogterm 0 term 2
+2024/06/24 15:20:11 1 start leader term 2
+2024/06/24 15:20:11 0 to leader 1 from term 2 to term 2
+2024/06/24 15:20:11 2 to leader 1 from term 2 to term 2
+2024/06/24 15:20:11 1 start command {3 map[] [] 0 0 -1 3350509349111303326 1}
+2024/06/24 15:20:11 0 change log leader 1 term 2 start 0 end 0
+2024/06/24 15:20:11 2 change log leader 1 term 2 start 0 end 0
+2024/06/24 15:20:11 1 commit index 1
+2024/06/24 15:20:11 1 apply {3 map[] [] 0 0 -1 3350509349111303326 1} index 1
+2024/06/24 15:20:11 1 accept msg index 1 op {3 map[] [] 0 0 -1 3350509349111303326 1}
+2024/06/24 15:20:11 1 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 1
+2024/06/24 15:20:11 1 start command {3 map[] [] 0 0 -1 3350509349111303326 2}
+2024/06/24 15:20:11 2 commit index 1 argcommit 1 leader 1
+2024/06/24 15:20:11 2 change log leader 1 term 2 start 1 end 1
+2024/06/24 15:20:11 1 commit index 2
+2024/06/24 15:20:11 2 apply {3 map[] [] 0 0 -1 3350509349111303326 1} index 1
+2024/06/24 15:20:11 2 accept msg index 1 op {3 map[] [] 0 0 -1 3350509349111303326 1}
+2024/06/24 15:20:11 2 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 1
+2024/06/24 15:20:11 1 apply {3 map[] [] 0 0 -1 3350509349111303326 2} index 2
+2024/06/24 15:20:11 1 accept msg index 2 op {3 map[] [] 0 0 -1 3350509349111303326 2}
+2024/06/24 15:20:11 1 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 2
+2024/06/24 15:20:11 1 start command {0 map[1:[%!d(string=x) %!d(string=y) %!d(string=z)]] [] 0 0 0 3350509349111303326 3}
+2024/06/24 15:20:11 0 commit index 1 argcommit 1 leader 1
+2024/06/24 15:20:11 0 change log leader 1 term 2 start 1 end 1
+2024/06/24 15:20:11 0 apply {3 map[] [] 0 0 -1 3350509349111303326 1} index 1
+2024/06/24 15:20:11 0 accept msg index 1 op {3 map[] [] 0 0 -1 3350509349111303326 1}
+2024/06/24 15:20:11 0 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 1
+2024/06/24 15:20:11 2 commit index 2 argcommit 2 leader 1
+2024/06/24 15:20:11 0 change log leader 1 term 2 start 2 end 2
+2024/06/24 15:20:11 0 commit index 2 argcommit 2 leader 1
+2024/06/24 15:20:11 2 apply {3 map[] [] 0 0 -1 3350509349111303326 2} index 2
+2024/06/24 15:20:11 2 accept msg index 2 op {3 map[] [] 0 0 -1 3350509349111303326 2}
+2024/06/24 15:20:11 2 change log leader 1 term 2 start 2 end 2
+2024/06/24 15:20:11 0 apply {3 map[] [] 0 0 -1 3350509349111303326 2} index 2
+2024/06/24 15:20:11 0 accept msg index 2 op {3 map[] [] 0 0 -1 3350509349111303326 2}
+2024/06/24 15:20:11 2 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 2
+2024/06/24 15:20:11 0 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 2
+2024/06/24 15:20:11 1 commit index 3
+2024/06/24 15:20:11 1 apply {0 map[1:[x y z]] [] 0 0 0 3350509349111303326 3} index 3
+2024/06/24 15:20:11 1 accept msg index 3 op {0 map[1:[x y z]] [] 0 0 0 3350509349111303326 3}
+2024/06/24 15:20:11 1 Join map[1:[x y z]] seqid 3
+2024/06/24 15:20:11 1 start command {3 map[] [] 0 0 -1 3350509349111303326 4}
+2024/06/24 15:20:11 2 commit index 3 argcommit 3 leader 1
+2024/06/24 15:20:11 2 change log leader 1 term 2 start 3 end 3
+2024/06/24 15:20:11 0 change log leader 1 term 2 start 3 end 3
+2024/06/24 15:20:11 0 commit index 3 argcommit 3 leader 1
+2024/06/24 15:20:11 0 apply {0 map[1:[x y z]] [] 0 0 0 3350509349111303326 3} index 3
+2024/06/24 15:20:11 0 accept msg index 3 op {0 map[1:[x y z]] [] 0 0 0 3350509349111303326 3}
+2024/06/24 15:20:11 0 Join map[1:[x y z]] seqid 3
+2024/06/24 15:20:11 2 apply {0 map[1:[x y z]] [] 0 0 0 3350509349111303326 3} index 3
+2024/06/24 15:20:11 2 accept msg index 3 op {0 map[1:[x y z]] [] 0 0 0 3350509349111303326 3}
+2024/06/24 15:20:11 2 Join map[1:[x y z]] seqid 3
+2024/06/24 15:20:11 1 commit index 4
+2024/06/24 15:20:11 1 apply {3 map[] [] 0 0 -1 3350509349111303326 4} index 4
+2024/06/24 15:20:11 1 accept msg index 4 op {3 map[] [] 0 0 -1 3350509349111303326 4}
+2024/06/24 15:20:11 1 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 4
+2024/06/24 15:20:11 1 start command {3 map[] [] 0 0 -1 3350509349111303326 5}
+2024/06/24 15:20:11 2 commit index 4 argcommit 4 leader 1
+2024/06/24 15:20:11 2 change log leader 1 term 2 start 4 end 4
+2024/06/24 15:20:11 0 change log leader 1 term 2 start 4 end 4
+2024/06/24 15:20:11 0 commit index 4 argcommit 4 leader 1
+2024/06/24 15:20:11 0 apply {3 map[] [] 0 0 -1 3350509349111303326 4} index 4
+2024/06/24 15:20:11 0 accept msg index 4 op {3 map[] [] 0 0 -1 3350509349111303326 4}
+2024/06/24 15:20:11 0 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 4
+2024/06/24 15:20:11 2 apply {3 map[] [] 0 0 -1 3350509349111303326 4} index 4
+2024/06/24 15:20:11 2 accept msg index 4 op {3 map[] [] 0 0 -1 3350509349111303326 4}
+2024/06/24 15:20:11 2 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 4
+2024/06/24 15:20:11 1 commit index 5
+2024/06/24 15:20:11 1 apply {3 map[] [] 0 0 -1 3350509349111303326 5} index 5
+2024/06/24 15:20:11 1 accept msg index 5 op {3 map[] [] 0 0 -1 3350509349111303326 5}
+2024/06/24 15:20:11 1 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 5
+2024/06/24 15:20:11 1 start command {0 map[2:[%!d(string=a) %!d(string=b) %!d(string=c)]] [] 0 0 0 3350509349111303326 6}
+2024/06/24 15:20:11 2 commit index 5 argcommit 5 leader 1
+2024/06/24 15:20:11 2 change log leader 1 term 2 start 5 end 5
+2024/06/24 15:20:11 0 change log leader 1 term 2 start 5 end 5
+2024/06/24 15:20:11 0 commit index 5 argcommit 5 leader 1
+2024/06/24 15:20:11 2 apply {3 map[] [] 0 0 -1 3350509349111303326 5} index 5
+2024/06/24 15:20:11 2 accept msg index 5 op {3 map[] [] 0 0 -1 3350509349111303326 5}
+2024/06/24 15:20:11 2 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 5
+2024/06/24 15:20:11 0 apply {3 map[] [] 0 0 -1 3350509349111303326 5} index 5
+2024/06/24 15:20:11 0 accept msg index 5 op {3 map[] [] 0 0 -1 3350509349111303326 5}
+2024/06/24 15:20:11 0 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 5
+2024/06/24 15:20:12 1 commit index 6
+2024/06/24 15:20:12 1 apply {0 map[2:[a b c]] [] 0 0 0 3350509349111303326 6} index 6
+2024/06/24 15:20:12 1 accept msg index 6 op {0 map[2:[a b c]] [] 0 0 0 3350509349111303326 6}
+2024/06/24 15:20:12 1 Join map[2:[a b c]] seqid 6
+2024/06/24 15:20:12 1 start command {3 map[] [] 0 0 -1 3350509349111303326 7}
+2024/06/24 15:20:12 0 change log leader 1 term 2 start 6 end 6
+2024/06/24 15:20:12 0 commit index 6 argcommit 6 leader 1
+2024/06/24 15:20:12 2 commit index 6 argcommit 6 leader 1
+2024/06/24 15:20:12 2 change log leader 1 term 2 start 6 end 6
+2024/06/24 15:20:12 1 commit index 7
+2024/06/24 15:20:12 0 commit index 7 argcommit 7 leader 1
+2024/06/24 15:20:12 2 apply {0 map[2:[a b c]] [] 0 0 0 3350509349111303326 6} index 6
+2024/06/24 15:20:12 2 accept msg index 6 op {0 map[2:[a b c]] [] 0 0 0 3350509349111303326 6}
+2024/06/24 15:20:12 2 Join map[2:[a b c]] seqid 6
+2024/06/24 15:20:12 1 apply {3 map[] [] 0 0 -1 3350509349111303326 7} index 7
+2024/06/24 15:20:12 1 accept msg index 7 op {3 map[] [] 0 0 -1 3350509349111303326 7}
+2024/06/24 15:20:12 1 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 7
+2024/06/24 15:20:12 1 start command {3 map[] [] 0 0 -1 3350509349111303326 8}
+2024/06/24 15:20:12 0 apply {0 map[2:[a b c]] [] 0 0 0 3350509349111303326 6} index 6
+2024/06/24 15:20:12 0 apply {3 map[] [] 0 0 -1 3350509349111303326 7} index 7
+2024/06/24 15:20:12 0 accept msg index 6 op {0 map[2:[a b c]] [] 0 0 0 3350509349111303326 6}
+2024/06/24 15:20:12 0 Join map[2:[a b c]] seqid 6
+2024/06/24 15:20:12 0 accept msg index 7 op {3 map[] [] 0 0 -1 3350509349111303326 7}
+2024/06/24 15:20:12 0 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 7
+2024/06/24 15:20:12 2 change log leader 1 term 2 start 7 end 7
+2024/06/24 15:20:12 2 commit index 7 argcommit 7 leader 1
+2024/06/24 15:20:12 0 change log leader 1 term 2 start 7 end 7
+2024/06/24 15:20:12 1 commit index 8
+2024/06/24 15:20:12 2 apply {3 map[] [] 0 0 -1 3350509349111303326 7} index 7
+2024/06/24 15:20:12 2 accept msg index 7 op {3 map[] [] 0 0 -1 3350509349111303326 7}
+2024/06/24 15:20:12 2 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 7
+2024/06/24 15:20:12 1 apply {3 map[] [] 0 0 -1 3350509349111303326 8} index 8
+2024/06/24 15:20:12 1 accept msg index 8 op {3 map[] [] 0 0 -1 3350509349111303326 8}
+2024/06/24 15:20:12 1 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 8
+2024/06/24 15:20:12 1 start command {3 map[] [] 0 0 -1 3350509349111303326 9}
+2024/06/24 15:20:12 2 change log leader 1 term 2 start 8 end 8
+2024/06/24 15:20:12 2 commit index 8 argcommit 8 leader 1
+2024/06/24 15:20:12 0 commit index 8 argcommit 8 leader 1
+2024/06/24 15:20:12 0 change log leader 1 term 2 start 8 end 8
+2024/06/24 15:20:12 1 commit index 9
+2024/06/24 15:20:12 0 apply {3 map[] [] 0 0 -1 3350509349111303326 8} index 8
+2024/06/24 15:20:12 0 accept msg index 8 op {3 map[] [] 0 0 -1 3350509349111303326 8}
+2024/06/24 15:20:12 0 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 8
+2024/06/24 15:20:12 1 apply {3 map[] [] 0 0 -1 3350509349111303326 9} index 9
+2024/06/24 15:20:12 1 accept msg index 9 op {3 map[] [] 0 0 -1 3350509349111303326 9}
+2024/06/24 15:20:12 1 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 9
+2024/06/24 15:20:12 2 apply {3 map[] [] 0 0 -1 3350509349111303326 8} index 8
+2024/06/24 15:20:12 2 accept msg index 8 op {3 map[] [] 0 0 -1 3350509349111303326 8}
+2024/06/24 15:20:12 2 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 8
+2024/06/24 15:20:12 1 start command {1 map[] [1] 0 0 0 3350509349111303326 10}
+2024/06/24 15:20:12 2 change log leader 1 term 2 start 9 end 9
+2024/06/24 15:20:12 2 commit index 9 argcommit 9 leader 1
+2024/06/24 15:20:12 0 commit index 9 argcommit 9 leader 1
+2024/06/24 15:20:12 0 change log leader 1 term 2 start 9 end 9
+2024/06/24 15:20:12 1 commit index 10
+2024/06/24 15:20:12 0 apply {3 map[] [] 0 0 -1 3350509349111303326 9} index 9
+2024/06/24 15:20:12 0 accept msg index 9 op {3 map[] [] 0 0 -1 3350509349111303326 9}
+2024/06/24 15:20:12 0 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 9
+2024/06/24 15:20:12 1 apply {1 map[] [1] 0 0 0 3350509349111303326 10} index 10
+2024/06/24 15:20:12 1 accept msg index 10 op {1 map[] [1] 0 0 0 3350509349111303326 10}
+2024/06/24 15:20:12 1 Leave [1] seqid 10
+2024/06/24 15:20:12 1 start command {3 map[] [] 0 0 -1 3350509349111303326 11}
+2024/06/24 15:20:12 2 apply {3 map[] [] 0 0 -1 3350509349111303326 9} index 9
+2024/06/24 15:20:12 2 accept msg index 9 op {3 map[] [] 0 0 -1 3350509349111303326 9}
+2024/06/24 15:20:12 2 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 9
+2024/06/24 15:20:12 0 commit index 10 argcommit 10 leader 1
+2024/06/24 15:20:12 2 commit index 10 argcommit 10 leader 1
+2024/06/24 15:20:12 2 change log leader 1 term 2 start 10 end 10
+2024/06/24 15:20:12 0 change log leader 1 term 2 start 10 end 10
+2024/06/24 15:20:12 1 commit index 11
+2024/06/24 15:20:12 1 apply {3 map[] [] 0 0 -1 3350509349111303326 11} index 11
+2024/06/24 15:20:12 1 accept msg index 11 op {3 map[] [] 0 0 -1 3350509349111303326 11}
+2024/06/24 15:20:12 1 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 11
+2024/06/24 15:20:12 1 start command {3 map[] [] 0 0 -1 3350509349111303326 12}
+2024/06/24 15:20:12 2 apply {1 map[] [1] 0 0 0 3350509349111303326 10} index 10
+2024/06/24 15:20:12 2 accept msg index 10 op {1 map[] [1] 0 0 0 3350509349111303326 10}
+2024/06/24 15:20:12 2 Leave [1] seqid 10
+2024/06/24 15:20:12 0 apply {1 map[] [1] 0 0 0 3350509349111303326 10} index 10
+2024/06/24 15:20:12 0 accept msg index 10 op {1 map[] [1] 0 0 0 3350509349111303326 10}
+2024/06/24 15:20:12 0 Leave [1] seqid 10
+2024/06/24 15:20:12 0 commit index 11 argcommit 11 leader 1
+2024/06/24 15:20:12 2 change log leader 1 term 2 start 11 end 11
+2024/06/24 15:20:12 2 commit index 11 argcommit 11 leader 1
+2024/06/24 15:20:12 0 change log leader 1 term 2 start 11 end 11
+2024/06/24 15:20:12 0 apply {3 map[] [] 0 0 -1 3350509349111303326 11} index 11
+2024/06/24 15:20:12 0 accept msg index 11 op {3 map[] [] 0 0 -1 3350509349111303326 11}
+2024/06/24 15:20:12 0 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 11
+2024/06/24 15:20:12 0 snapshot leader 1 index 10 snapshotlastindex -1 term 2
+2024/06/24 15:20:12 1 commit index 12
+2024/06/24 15:20:12 1 apply {3 map[] [] 0 0 -1 3350509349111303326 12} index 12
+2024/06/24 15:20:12 2 apply {3 map[] [] 0 0 -1 3350509349111303326 11} index 11
+2024/06/24 15:20:12 2 accept msg index 11 op {3 map[] [] 0 0 -1 3350509349111303326 11}
+2024/06/24 15:20:12 2 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 11
+2024/06/24 15:20:12 2 snapshot leader 1 index 10 snapshotlastindex -1 term 2
+2024/06/24 15:20:12 1 accept msg index 12 op {3 map[] [] 0 0 -1 3350509349111303326 12}
+2024/06/24 15:20:12 1 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 12
+2024/06/24 15:20:12 1 snapshot leader 1 index 11 snapshotlastindex -1 term 2
+2024/06/24 15:20:12 1 start command {1 map[] [2] 0 0 0 3350509349111303326 13}
+2024/06/24 15:20:12 2 commit index 12 argcommit 12 leader 1
+2024/06/24 15:20:12 0 commit index 12 argcommit 12 leader 1
+2024/06/24 15:20:12 2 change log leader 1 term 2 start 1 end 12
+2024/06/24 15:20:12 0 change log leader 1 term 2 start 1 end 12
+2024/06/24 15:20:12 1 commit index 13
+2024/06/24 15:20:12 0 apply {3 map[] [] 0 0 -1 3350509349111303326 12} index 12
+2024/06/24 15:20:12 0 accept msg index 12 op {3 map[] [] 0 0 -1 3350509349111303326 12}
+2024/06/24 15:20:12 0 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 12
+2024/06/24 15:20:12 1 apply {1 map[] [2] 0 0 0 3350509349111303326 13} index 13
+2024/06/24 15:20:12 1 accept msg index 13 op {1 map[] [2] 0 0 0 3350509349111303326 13}
+2024/06/24 15:20:12 1 Leave [2] seqid 13
+2024/06/24 15:20:12 2 apply {3 map[] [] 0 0 -1 3350509349111303326 12} index 12
+2024/06/24 15:20:12 2 accept msg index 12 op {3 map[] [] 0 0 -1 3350509349111303326 12}
+2024/06/24 15:20:12 2 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 12
+2024/06/24 15:20:12 1 start command {3 map[] [] 0 0 -1 3350509349111303326 14}
+2024/06/24 15:20:12 2 commit index 13 argcommit 13 leader 1
+2024/06/24 15:20:12 0 change log leader 1 term 2 start 2 end 13
+2024/06/24 15:20:12 0 commit index 13 argcommit 13 leader 1
+2024/06/24 15:20:12 2 change log leader 1 term 2 start 2 end 13
+2024/06/24 15:20:12 1 commit index 14
+2024/06/24 15:20:12 1 apply {3 map[] [] 0 0 -1 3350509349111303326 14} index 14
+2024/06/24 15:20:12 1 accept msg index 14 op {3 map[] [] 0 0 -1 3350509349111303326 14}
+2024/06/24 15:20:12 1 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 14
+2024/06/24 15:20:12 1 start command {3 map[] [] 0 0 0 3350509349111303326 15}
+2024/06/24 15:20:12 2 apply {1 map[] [2] 0 0 0 3350509349111303326 13} index 13
+2024/06/24 15:20:12 2 accept msg index 13 op {1 map[] [2] 0 0 0 3350509349111303326 13}
+2024/06/24 15:20:12 2 Leave [2] seqid 13
+2024/06/24 15:20:12 2 commit index 14 argcommit 14 leader 1
+2024/06/24 15:20:12 2 apply {3 map[] [] 0 0 -1 3350509349111303326 14} index 14
+2024/06/24 15:20:12 2 accept msg index 14 op {3 map[] [] 0 0 -1 3350509349111303326 14}
+2024/06/24 15:20:12 2 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 14
+2024/06/24 15:20:12 2 change log leader 1 term 2 start 3 end 14
+2024/06/24 15:20:12 1 commit index 15
+2024/06/24 15:20:12 1 apply {3 map[] [] 0 0 0 3350509349111303326 15} index 15
+2024/06/24 15:20:12 1 accept msg index 15 op {3 map[] [] 0 0 0 3350509349111303326 15}
+2024/06/24 15:20:12 1 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 15
+2024/06/24 15:20:12 1 start command {3 map[] [] 0 0 1 3350509349111303326 16}
+2024/06/24 15:20:13 2 commit index 15 argcommit 15 leader 1
+2024/06/24 15:20:13 2 change log leader 1 term 2 start 4 end 15
+2024/06/24 15:20:13 2 apply {3 map[] [] 0 0 0 3350509349111303326 15} index 15
+2024/06/24 15:20:13 2 accept msg index 15 op {3 map[] [] 0 0 0 3350509349111303326 15}
+2024/06/24 15:20:13 2 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 15
+2024/06/24 15:20:13 1 commit index 16
+2024/06/24 15:20:13 1 apply {3 map[] [] 0 0 1 3350509349111303326 16} index 16
+2024/06/24 15:20:13 1 accept msg index 16 op {3 map[] [] 0 0 1 3350509349111303326 16}
+2024/06/24 15:20:13 1 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 16
+2024/06/24 15:20:13 1 start command {3 map[] [] 0 0 2 3350509349111303326 17}
+2024/06/24 15:20:13 2 commit index 16 argcommit 16 leader 1
+2024/06/24 15:20:13 2 apply {3 map[] [] 0 0 1 3350509349111303326 16} index 16
+2024/06/24 15:20:13 2 accept msg index 16 op {3 map[] [] 0 0 1 3350509349111303326 16}
+2024/06/24 15:20:13 2 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 16
+2024/06/24 15:20:13 2 change log leader 1 term 2 start 5 end 16
+2024/06/24 15:20:13 1 commit index 17
+2024/06/24 15:20:13 1 apply {3 map[] [] 0 0 2 3350509349111303326 17} index 17
+2024/06/24 15:20:13 1 accept msg index 17 op {3 map[] [] 0 0 2 3350509349111303326 17}
+2024/06/24 15:20:13 1 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 17
+2024/06/24 15:20:13 1 start command {3 map[] [] 0 0 0 3350509349111303326 18}
+2024/06/24 15:20:13 2 commit index 17 argcommit 17 leader 1
+2024/06/24 15:20:13 2 change log leader 1 term 2 start 6 end 17
+2024/06/24 15:20:13 2 apply {3 map[] [] 0 0 2 3350509349111303326 17} index 17
+2024/06/24 15:20:13 2 accept msg index 17 op {3 map[] [] 0 0 2 3350509349111303326 17}
+2024/06/24 15:20:13 2 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 17
+2024/06/24 15:20:13 1 commit index 18
+2024/06/24 15:20:13 1 apply {3 map[] [] 0 0 0 3350509349111303326 18} index 18
+2024/06/24 15:20:13 1 accept msg index 18 op {3 map[] [] 0 0 0 3350509349111303326 18}
+2024/06/24 15:20:13 1 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 18
+2024/06/24 15:20:13 1 start command {3 map[] [] 0 0 3 3350509349111303326 19}
+2024/06/24 15:20:13 2 commit index 18 argcommit 18 leader 1
+2024/06/24 15:20:13 2 change log leader 1 term 2 start 7 end 18
+2024/06/24 15:20:13 2 apply {3 map[] [] 0 0 0 3350509349111303326 18} index 18
+2024/06/24 15:20:13 2 accept msg index 18 op {3 map[] [] 0 0 0 3350509349111303326 18}
+2024/06/24 15:20:13 2 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 18
+2024/06/24 15:20:13 1 commit index 19
+2024/06/24 15:20:13 1 apply {3 map[] [] 0 0 3 3350509349111303326 19} index 19
+2024/06/24 15:20:13 1 accept msg index 19 op {3 map[] [] 0 0 3 3350509349111303326 19}
+2024/06/24 15:20:13 1 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 19
+2024/06/24 15:20:13 1 start command {3 map[] [] 0 0 4 3350509349111303326 20}
+2024/06/24 15:20:13 0 timeout term 2 leader -1
+2024/06/24 15:20:13 0 start election term 3
+2024/06/24 15:20:13 2 change log leader 1 term 2 start 8 end 19
+2024/06/24 15:20:13 2 commit index 19 argcommit 19 leader 1
+2024/06/24 15:20:13 2 apply {3 map[] [] 0 0 3 3350509349111303326 19} index 19
+2024/06/24 15:20:13 2 accept msg index 19 op {3 map[] [] 0 0 3 3350509349111303326 19}
+2024/06/24 15:20:13 2 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 19
+2024/06/24 15:20:13 1 commit index 20
+2024/06/24 15:20:13 1 apply {3 map[] [] 0 0 4 3350509349111303326 20} index 20
+2024/06/24 15:20:13 1 accept msg index 20 op {3 map[] [] 0 0 4 3350509349111303326 20}
+2024/06/24 15:20:13 1 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 20
+2024/06/24 15:20:13 0 restart snapshotlastindex 11 loglen 3
+2024/06/24 15:20:13 0 timeout term 2 leader 1
+2024/06/24 15:20:13 0 start election term 3
+2024/06/24 15:20:13 2 recive vote request 0 other term 3 my term 2
+2024/06/24 15:20:13 0 apply {3 map[] [] 0 0 -1 3350509349111303326 12} index 12
+2024/06/24 15:20:13 0 apply {1 map[] [2] 0 0 0 3350509349111303326 13} index 13
+2024/06/24 15:20:13 0 accept msg index 12 op {3 map[] [] 0 0 -1 3350509349111303326 12}
+2024/06/24 15:20:13 0 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 12
+2024/06/24 15:20:13 0 accept msg index 13 op {1 map[] [2] 0 0 0 3350509349111303326 13}
+2024/06/24 15:20:13 0 Leave [2] seqid 13
+2024/06/24 15:20:13 1 timeout term 2 leader -1
+2024/06/24 15:20:13 1 start election term 3
+2024/06/24 15:20:13 0 timeout term 3 leader -1
+2024/06/24 15:20:13 0 start election term 4
+2024/06/24 15:20:13 2 recive vote request 0 other term 4 my term 3
+2024/06/24 15:20:13 2 timeout term 4 leader -1
+2024/06/24 15:20:13 2 start election term 5
+2024/06/24 15:20:13 0 recive vote request 2 other term 5 my term 4
+2024/06/24 15:20:13 0 vote 2 mylogterm 2 otherlogterm 2 term 5
+2024/06/24 15:20:13 2 start leader term 5
+2024/06/24 15:20:13 0 to leader 2 from term 5 to term 5
+2024/06/24 15:20:14 2 start command {3 map[] [] 0 0 0 3350509349111303326 21}
+2024/06/24 15:20:14 0 change log leader 2 term 5 start 2 end 20
+2024/06/24 15:20:14 2 commit index 21
+2024/06/24 15:20:14 2 apply {3 map[] [] 0 0 4 3350509349111303326 20} index 20
+2024/06/24 15:20:14 2 apply {3 map[] [] 0 0 0 3350509349111303326 21} index 21
+2024/06/24 15:20:14 2 accept msg index 20 op {3 map[] [] 0 0 4 3350509349111303326 20}
+2024/06/24 15:20:14 2 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 20
+2024/06/24 15:20:14 2 accept msg index 21 op {3 map[] [] 0 0 0 3350509349111303326 21}
+2024/06/24 15:20:14 2 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 21
+2024/06/24 15:20:14 2 start command {3 map[] [] 0 0 1 3350509349111303326 22}
+2024/06/24 15:20:14 0 change log leader 2 term 5 start 10 end 21
+2024/06/24 15:20:14 0 commit index 21 argcommit 21 leader 2
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 -1 3350509349111303326 14} index 14
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 0 3350509349111303326 15} index 15
+2024/06/24 15:20:14 0 accept msg index 14 op {3 map[] [] 0 0 -1 3350509349111303326 14}
+2024/06/24 15:20:14 0 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 14
+2024/06/24 15:20:14 0 accept msg index 15 op {3 map[] [] 0 0 0 3350509349111303326 15}
+2024/06/24 15:20:14 0 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 15
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 1 3350509349111303326 16} index 16
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 2 3350509349111303326 17} index 17
+2024/06/24 15:20:14 0 accept msg index 16 op {3 map[] [] 0 0 1 3350509349111303326 16}
+2024/06/24 15:20:14 0 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 16
+2024/06/24 15:20:14 0 accept msg index 17 op {3 map[] [] 0 0 2 3350509349111303326 17}
+2024/06/24 15:20:14 0 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 17
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 0 3350509349111303326 18} index 18
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 3 3350509349111303326 19} index 19
+2024/06/24 15:20:14 0 accept msg index 18 op {3 map[] [] 0 0 0 3350509349111303326 18}
+2024/06/24 15:20:14 0 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 18
+2024/06/24 15:20:14 0 accept msg index 19 op {3 map[] [] 0 0 3 3350509349111303326 19}
+2024/06/24 15:20:14 0 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 19
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 4 3350509349111303326 20} index 20
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 0 3350509349111303326 21} index 21
+2024/06/24 15:20:14 0 accept msg index 20 op {3 map[] [] 0 0 4 3350509349111303326 20}
+2024/06/24 15:20:14 0 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 20
+2024/06/24 15:20:14 0 accept msg index 21 op {3 map[] [] 0 0 0 3350509349111303326 21}
+2024/06/24 15:20:14 0 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 21
+2024/06/24 15:20:14 2 commit index 22
+2024/06/24 15:20:14 2 apply {3 map[] [] 0 0 1 3350509349111303326 22} index 22
+2024/06/24 15:20:14 2 accept msg index 22 op {3 map[] [] 0 0 1 3350509349111303326 22}
+2024/06/24 15:20:14 2 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 22
+2024/06/24 15:20:14 0 commit index 22 argcommit 22 leader 2
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 1 3350509349111303326 22} index 22
+2024/06/24 15:20:14 0 accept msg index 22 op {3 map[] [] 0 0 1 3350509349111303326 22}
+2024/06/24 15:20:14 0 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 22
+2024/06/24 15:20:14 2 start command {3 map[] [] 0 0 2 3350509349111303326 23}
+2024/06/24 15:20:14 0 change log leader 2 term 5 start 11 end 22
+2024/06/24 15:20:14 2 commit index 23
+2024/06/24 15:20:14 2 apply {3 map[] [] 0 0 2 3350509349111303326 23} index 23
+2024/06/24 15:20:14 2 accept msg index 23 op {3 map[] [] 0 0 2 3350509349111303326 23}
+2024/06/24 15:20:14 2 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 23
+2024/06/24 15:20:14 2 snapshot leader 2 index 22 snapshotlastindex 10 term 5
+2024/06/24 15:20:14 2 start command {3 map[] [] 0 0 0 3350509349111303326 24}
+2024/06/24 15:20:14 0 commit index 23 argcommit 23 leader 2
+2024/06/24 15:20:14 0 change log leader 2 term 5 start 12 end 23
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 2 3350509349111303326 23} index 23
+2024/06/24 15:20:14 0 accept msg index 23 op {3 map[] [] 0 0 2 3350509349111303326 23}
+2024/06/24 15:20:14 0 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 23
+2024/06/24 15:20:14 0 snapshot leader 2 index 22 snapshotlastindex 10 term 5
+2024/06/24 15:20:14 2 commit index 24
+2024/06/24 15:20:14 2 apply {3 map[] [] 0 0 0 3350509349111303326 24} index 24
+2024/06/24 15:20:14 2 accept msg index 24 op {3 map[] [] 0 0 0 3350509349111303326 24}
+2024/06/24 15:20:14 2 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 24
+2024/06/24 15:20:14 2 start command {3 map[] [] 0 0 3 3350509349111303326 25}
+2024/06/24 15:20:14 0 change log leader 2 term 5 start 1 end 24
+2024/06/24 15:20:14 0 commit index 24 argcommit 24 leader 2
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 0 3350509349111303326 24} index 24
+2024/06/24 15:20:14 0 accept msg index 24 op {3 map[] [] 0 0 0 3350509349111303326 24}
+2024/06/24 15:20:14 0 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 24
+2024/06/24 15:20:14 2 commit index 25
+2024/06/24 15:20:14 2 apply {3 map[] [] 0 0 3 3350509349111303326 25} index 25
+2024/06/24 15:20:14 2 accept msg index 25 op {3 map[] [] 0 0 3 3350509349111303326 25}
+2024/06/24 15:20:14 2 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 25
+2024/06/24 15:20:14 2 start command {3 map[] [] 0 0 4 3350509349111303326 26}
+2024/06/24 15:20:14 0 change log leader 2 term 5 start 2 end 25
+2024/06/24 15:20:14 0 commit index 25 argcommit 25 leader 2
+2024/06/24 15:20:14 0 apply {3 map[] [] 0 0 3 3350509349111303326 25} index 25
+2024/06/24 15:20:14 0 accept msg index 25 op {3 map[] [] 0 0 3 3350509349111303326 25}
+2024/06/24 15:20:14 0 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 25
+2024/06/24 15:20:14 2 commit index 26
+2024/06/24 15:20:14 2 apply {3 map[] [] 0 0 4 3350509349111303326 26} index 26
+2024/06/24 15:20:14 2 accept msg index 26 op {3 map[] [] 0 0 4 3350509349111303326 26}
+2024/06/24 15:20:14 2 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 26
+2024/06/24 15:20:14 1 restart snapshotlastindex 12 loglen 8
+2024/06/24 15:20:14 1 start command {3 map[] [] 0 0 0 3350509349111303326 27}
+2024/06/24 15:20:14 1 apply {1 map[] [2] 0 0 0 3350509349111303326 13} index 13
+2024/06/24 15:20:14 1 accept msg index 13 op {1 map[] [2] 0 0 0 3350509349111303326 13}
+2024/06/24 15:20:14 1 Leave [2] seqid 13
+2024/06/24 15:20:14 1 apply {3 map[] [] 0 0 -1 3350509349111303326 14} index 14
+2024/06/24 15:20:14 1 apply {3 map[] [] 0 0 0 3350509349111303326 15} index 15
+2024/06/24 15:20:14 1 accept msg index 14 op {3 map[] [] 0 0 -1 3350509349111303326 14}
+2024/06/24 15:20:14 1 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 14
+2024/06/24 15:20:14 1 accept msg index 15 op {3 map[] [] 0 0 0 3350509349111303326 15}
+2024/06/24 15:20:14 1 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 15
+2024/06/24 15:20:14 1 apply {3 map[] [] 0 0 1 3350509349111303326 16} index 16
+2024/06/24 15:20:14 1 apply {3 map[] [] 0 0 2 3350509349111303326 17} index 17
+2024/06/24 15:20:14 1 accept msg index 16 op {3 map[] [] 0 0 1 3350509349111303326 16}
+2024/06/24 15:20:14 1 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 16
+2024/06/24 15:20:14 1 accept msg index 17 op {3 map[] [] 0 0 2 3350509349111303326 17}
+2024/06/24 15:20:14 1 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 17
+2024/06/24 15:20:14 1 apply {3 map[] [] 0 0 0 3350509349111303326 18} index 18
+2024/06/24 15:20:14 1 apply {3 map[] [] 0 0 3 3350509349111303326 19} index 19
+2024/06/24 15:20:14 1 accept msg index 18 op {3 map[] [] 0 0 0 3350509349111303326 18}
+2024/06/24 15:20:14 1 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 18
+2024/06/24 15:20:14 1 accept msg index 19 op {3 map[] [] 0 0 3 3350509349111303326 19}
+2024/06/24 15:20:14 1 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 19
+2024/06/24 15:20:14 1 apply {3 map[] [] 0 0 4 3350509349111303326 20} index 20
+2024/06/24 15:20:14 1 accept msg index 20 op {3 map[] [] 0 0 4 3350509349111303326 20}
+2024/06/24 15:20:14 1 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 20
+2024/06/24 15:20:15 2 timeout term 5 leader -1
+2024/06/24 15:20:15 2 start election term 6
+2024/06/24 15:20:15 0 timeout term 5 leader 2
+2024/06/24 15:20:15 0 start election term 6
+2024/06/24 15:20:15 1 recive vote request 0 other term 6 my term 2
+2024/06/24 15:20:15 1 vote 0 mylogterm 2 otherlogterm 5 term 6
+2024/06/24 15:20:15 1 timeout term 6 leader -1
+2024/06/24 15:20:15 1 start election term 7
+2024/06/24 15:20:15 0 recive vote request 1 other term 7 my term 6
+2024/06/24 15:20:15 0 timeout term 7 leader -1
+2024/06/24 15:20:15 0 start election term 8
+2024/06/24 15:20:15 1 recive vote request 0 other term 8 my term 7
+2024/06/24 15:20:15 1 vote 0 mylogterm 2 otherlogterm 5 term 8
+2024/06/24 15:20:15 0 start leader term 8
+2024/06/24 15:20:15 1 to leader 0 from term 8 to term 8
+2024/06/24 15:20:15 0 start command {3 map[] [] 0 0 0 3350509349111303326 27}
+2024/06/24 15:20:16 1 installsnapshot leader 0 index 23 leader term 8 term 8
+2024/06/24 15:20:16 1 change log leader 0 term 8 start 0 end 26
+2024/06/24 15:20:16 0 commit index 27
+2024/06/24 15:20:16 0 apply {3 map[] [] 0 0 4 3350509349111303326 26} index 26
+2024/06/24 15:20:16 0 apply {3 map[] [] 0 0 0 3350509349111303326 27} index 27
+2024/06/24 15:20:16 0 accept msg index 26 op {3 map[] [] 0 0 4 3350509349111303326 26}
+2024/06/24 15:20:16 0 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 26
+2024/06/24 15:20:16 0 accept msg index 27 op {3 map[] [] 0 0 0 3350509349111303326 27}
+2024/06/24 15:20:16 0 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 27
+2024/06/24 15:20:16 0 start command {3 map[] [] 0 0 1 3350509349111303326 28}
+2024/06/24 15:20:16 1 commit index 27 argcommit 27 leader 0
+2024/06/24 15:20:16 1 change log leader 0 term 8 start 4 end 27
+2024/06/24 15:20:16 0 commit index 28
+2024/06/24 15:20:16 0 apply {3 map[] [] 0 0 1 3350509349111303326 28} index 28
+2024/06/24 15:20:16 0 accept msg index 28 op {3 map[] [] 0 0 1 3350509349111303326 28}
+2024/06/24 15:20:16 0 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 28
+2024/06/24 15:20:16 1 apply {3 map[] [] 0 0 0 3350509349111303326 24} index 24
+2024/06/24 15:20:16 1 apply {3 map[] [] 0 0 3 3350509349111303326 25} index 25
+2024/06/24 15:20:16 1 accept msg index 24 op {3 map[] [] 0 0 0 3350509349111303326 24}
+2024/06/24 15:20:16 1 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 24
+2024/06/24 15:20:16 1 accept msg index 25 op {3 map[] [] 0 0 3 3350509349111303326 25}
+2024/06/24 15:20:16 1 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 25
+2024/06/24 15:20:16 1 apply {3 map[] [] 0 0 4 3350509349111303326 26} index 26
+2024/06/24 15:20:16 1 apply {3 map[] [] 0 0 0 3350509349111303326 27} index 27
+2024/06/24 15:20:16 1 accept msg index 26 op {3 map[] [] 0 0 4 3350509349111303326 26}
+2024/06/24 15:20:16 1 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 26
+2024/06/24 15:20:16 1 accept msg index 27 op {3 map[] [] 0 0 0 3350509349111303326 27}
+2024/06/24 15:20:16 1 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 27
+2024/06/24 15:20:16 0 start command {3 map[] [] 0 0 2 3350509349111303326 29}
+2024/06/24 15:20:16 1 commit index 28 argcommit 28 leader 0
+2024/06/24 15:20:16 1 change log leader 0 term 8 start 5 end 28
+2024/06/24 15:20:16 1 apply {3 map[] [] 0 0 1 3350509349111303326 28} index 28
+2024/06/24 15:20:16 1 accept msg index 28 op {3 map[] [] 0 0 1 3350509349111303326 28}
+2024/06/24 15:20:16 1 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 28
+2024/06/24 15:20:16 0 commit index 29
+2024/06/24 15:20:16 0 apply {3 map[] [] 0 0 2 3350509349111303326 29} index 29
+2024/06/24 15:20:16 0 accept msg index 29 op {3 map[] [] 0 0 2 3350509349111303326 29}
+2024/06/24 15:20:16 0 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 29
+2024/06/24 15:20:16 1 commit index 29 argcommit 29 leader 0
+2024/06/24 15:20:16 0 start command {3 map[] [] 0 0 0 3350509349111303326 30}
+2024/06/24 15:20:16 1 apply {3 map[] [] 0 0 2 3350509349111303326 29} index 29
+2024/06/24 15:20:16 1 accept msg index 29 op {3 map[] [] 0 0 2 3350509349111303326 29}
+2024/06/24 15:20:16 1 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 29
+2024/06/24 15:20:16 1 change log leader 0 term 8 start 6 end 29
+2024/06/24 15:20:16 0 commit index 30
+2024/06/24 15:20:16 0 apply {3 map[] [] 0 0 0 3350509349111303326 30} index 30
+2024/06/24 15:20:16 0 accept msg index 30 op {3 map[] [] 0 0 0 3350509349111303326 30}
+2024/06/24 15:20:16 0 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 30
+2024/06/24 15:20:16 0 start command {3 map[] [] 0 0 3 3350509349111303326 31}
+2024/06/24 15:20:16 1 change log leader 0 term 8 start 7 end 30
+2024/06/24 15:20:16 1 commit index 30 argcommit 30 leader 0
+2024/06/24 15:20:16 1 apply {3 map[] [] 0 0 0 3350509349111303326 30} index 30
+2024/06/24 15:20:16 1 accept msg index 30 op {3 map[] [] 0 0 0 3350509349111303326 30}
+2024/06/24 15:20:16 1 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 30
+2024/06/24 15:20:16 0 commit index 31
+2024/06/24 15:20:16 0 apply {3 map[] [] 0 0 3 3350509349111303326 31} index 31
+2024/06/24 15:20:16 0 accept msg index 31 op {3 map[] [] 0 0 3 3350509349111303326 31}
+2024/06/24 15:20:16 0 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 31
+2024/06/24 15:20:16 0 start command {3 map[] [] 0 0 4 3350509349111303326 32}
+2024/06/24 15:20:16 1 commit index 31 argcommit 31 leader 0
+2024/06/24 15:20:16 1 change log leader 0 term 8 start 8 end 31
+2024/06/24 15:20:16 0 commit index 32
+2024/06/24 15:20:16 0 apply {3 map[] [] 0 0 4 3350509349111303326 32} index 32
+2024/06/24 15:20:16 0 accept msg index 32 op {3 map[] [] 0 0 4 3350509349111303326 32}
+2024/06/24 15:20:16 0 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 32
+2024/06/24 15:20:16 2 restart snapshotlastindex 23 loglen 3
+2024/06/24 15:20:16 1 apply {3 map[] [] 0 0 3 3350509349111303326 31} index 31
+2024/06/24 15:20:16 1 accept msg index 31 op {3 map[] [] 0 0 3 3350509349111303326 31}
+2024/06/24 15:20:16 1 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 31
+2024/06/24 15:20:16 2 apply {3 map[] [] 0 0 0 3350509349111303326 24} index 24
+2024/06/24 15:20:16 2 start command {0 map[503:[%!d(string=3a) %!d(string=3b) %!d(string=3c)]] [] 0 0 0 3350509349111303326 33}
+2024/06/24 15:20:16 2 apply {3 map[] [] 0 0 3 3350509349111303326 25} index 25
+2024/06/24 15:20:16 2 accept msg index 24 op {3 map[] [] 0 0 0 3350509349111303326 24}
+2024/06/24 15:20:16 2 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 24
+2024/06/24 15:20:16 2 accept msg index 25 op {3 map[] [] 0 0 3 3350509349111303326 25}
+2024/06/24 15:20:16 2 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 25
+2024/06/24 15:20:16 2 apply {3 map[] [] 0 0 4 3350509349111303326 26} index 26
+2024/06/24 15:20:16 2 accept msg index 26 op {3 map[] [] 0 0 4 3350509349111303326 26}
+2024/06/24 15:20:16 2 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 26
+2024/06/24 15:20:16 1 commit index 32 argcommit 32 leader 0
+2024/06/24 15:20:16 1 apply {3 map[] [] 0 0 4 3350509349111303326 32} index 32
+2024/06/24 15:20:16 1 accept msg index 32 op {3 map[] [] 0 0 4 3350509349111303326 32}
+2024/06/24 15:20:16 1 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 32
+2024/06/24 15:20:16 2 to leader 0 from term 5 to term 8
+2024/06/24 15:20:16 2 timeout term 8 leader 0
+2024/06/24 15:20:16 2 start election term 9
+2024/06/24 15:20:16 1 recive vote request 2 other term 9 my term 8
+2024/06/24 15:20:16 0 recive vote request 2 other term 9 my term 8
+2024/06/24 15:20:17 0 timeout term 9 leader -1
+2024/06/24 15:20:17 0 start election term 10
+2024/06/24 15:20:17 1 recive vote request 0 other term 10 my term 9
+2024/06/24 15:20:17 1 vote 0 mylogterm 8 otherlogterm 8 term 10
+2024/06/24 15:20:17 2 recive vote request 0 other term 10 my term 9
+2024/06/24 15:20:17 2 vote 0 mylogterm 5 otherlogterm 8 term 10
+2024/06/24 15:20:17 0 start leader term 10
+2024/06/24 15:20:17 1 to leader 0 from term 10 to term 10
+2024/06/24 15:20:17 2 to leader 0 from term 10 to term 10
+2024/06/24 15:20:17 0 start command {0 map[503:[%!d(string=3a) %!d(string=3b) %!d(string=3c)]] [] 0 0 0 3350509349111303326 33}
+2024/06/24 15:20:17 1 change log leader 0 term 10 start 9 end 32
+2024/06/24 15:20:17 0 commit index 33
+2024/06/24 15:20:17 0 apply {0 map[503:[3a 3b 3c]] [] 0 0 0 3350509349111303326 33} index 33
+2024/06/24 15:20:17 0 accept msg index 33 op {0 map[503:[3a 3b 3c]] [] 0 0 0 3350509349111303326 33}
+2024/06/24 15:20:17 0 Join map[503:[3a 3b 3c]] seqid 33
+2024/06/24 15:20:17 0 start command {0 map[504:[%!d(string=4a) %!d(string=4b) %!d(string=4c)]] [] 0 0 0 3350509349111303326 34}
+2024/06/24 15:20:17 1 change log leader 0 term 10 start 10 end 33
+2024/06/24 15:20:17 1 commit index 33 argcommit 33 leader 0
+2024/06/24 15:20:17 1 apply {0 map[503:[3a 3b 3c]] [] 0 0 0 3350509349111303326 33} index 33
+2024/06/24 15:20:17 1 accept msg index 33 op {0 map[503:[3a 3b 3c]] [] 0 0 0 3350509349111303326 33}
+2024/06/24 15:20:17 1 Join map[503:[3a 3b 3c]] seqid 33
+2024/06/24 15:20:17 0 commit index 34
+2024/06/24 15:20:17 2 change log leader 0 term 10 start 3 end 33
+2024/06/24 15:20:17 2 commit index 34 argcommit 34 leader 0
+2024/06/24 15:20:17 2 apply {3 map[] [] 0 0 0 3350509349111303326 27} index 27
+2024/06/24 15:20:17 2 apply {3 map[] [] 0 0 1 3350509349111303326 28} index 28
+2024/06/24 15:20:17 0 apply {0 map[504:[4a 4b 4c]] [] 0 0 0 3350509349111303326 34} index 34
+2024/06/24 15:20:17 0 accept msg index 34 op {0 map[504:[4a 4b 4c]] [] 0 0 0 3350509349111303326 34}
+2024/06/24 15:20:17 2 accept msg index 27 op {3 map[] [] 0 0 0 3350509349111303326 27}
+2024/06/24 15:20:17 2 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 27
+2024/06/24 15:20:17 2 accept msg index 28 op {3 map[] [] 0 0 1 3350509349111303326 28}
+2024/06/24 15:20:17 2 Query cfg {1 [1 1 1 1 1 1 1 1 1 1] map[1:[x y z]]} seqid 28
+2024/06/24 15:20:17 0 Join map[504:[4a 4b 4c]] seqid 34
+2024/06/24 15:20:17 0 start command {3 map[] [] 0 0 -1 3350509349111303326 35}
+2024/06/24 15:20:17 2 apply {3 map[] [] 0 0 2 3350509349111303326 29} index 29
+2024/06/24 15:20:17 2 apply {3 map[] [] 0 0 0 3350509349111303326 30} index 30
+2024/06/24 15:20:17 2 accept msg index 29 op {3 map[] [] 0 0 2 3350509349111303326 29}
+2024/06/24 15:20:17 2 Query cfg {2 [2 2 2 2 2 1 1 1 1 1] map[1:[x y z] 2:[a b c]]} seqid 29
+2024/06/24 15:20:17 2 accept msg index 30 op {3 map[] [] 0 0 0 3350509349111303326 30}
+2024/06/24 15:20:17 2 Query cfg {0 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 30
+2024/06/24 15:20:17 2 apply {3 map[] [] 0 0 3 3350509349111303326 31} index 31
+2024/06/24 15:20:17 2 apply {3 map[] [] 0 0 4 3350509349111303326 32} index 32
+2024/06/24 15:20:17 2 accept msg index 31 op {3 map[] [] 0 0 3 3350509349111303326 31}
+2024/06/24 15:20:17 2 Query cfg {3 [2 2 2 2 2 2 2 2 2 2] map[2:[a b c]]} seqid 31
+2024/06/24 15:20:17 2 accept msg index 32 op {3 map[] [] 0 0 4 3350509349111303326 32}
+2024/06/24 15:20:17 2 Query cfg {4 [0 0 0 0 0 0 0 0 0 0] map[]} seqid 32
+2024/06/24 15:20:17 2 apply {0 map[503:[3a 3b 3c]] [] 0 0 0 3350509349111303326 33} index 33
+2024/06/24 15:20:17 2 apply {0 map[504:[4a 4b 4c]] [] 0 0 0 3350509349111303326 34} index 34
+2024/06/24 15:20:17 2 accept msg index 33 op {0 map[503:[3a 3b 3c]] [] 0 0 0 3350509349111303326 33}
+2024/06/24 15:20:17 2 Join map[503:[3a 3b 3c]] seqid 33
+2024/06/24 15:20:17 2 accept msg index 34 op {0 map[504:[4a 4b 4c]] [] 0 0 0 3350509349111303326 34}
+2024/06/24 15:20:17 2 Join map[504:[4a 4b 4c]] seqid 34
+2024/06/24 15:20:18 1 commit index 34 argcommit 34 leader 0
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 11 end 34
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 11 end 34
+2024/06/24 15:20:18 0 commit index 35
+2024/06/24 15:20:18 2 commit index 35 argcommit 35 leader 0
+2024/06/24 15:20:18 0 apply {3 map[] [] 0 0 -1 3350509349111303326 35} index 35
+2024/06/24 15:20:18 0 accept msg index 35 op {3 map[] [] 0 0 -1 3350509349111303326 35}
+2024/06/24 15:20:18 0 Query cfg {6 [504 504 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 35
+2024/06/24 15:20:18 0 snapshot leader 0 index 34 snapshotlastindex 22 term 10
+2024/06/24 15:20:18 0 start command {2 map[] [] 0 503 0 3350509349111303326 36}
+2024/06/24 15:20:18 1 apply {0 map[504:[4a 4b 4c]] [] 0 0 0 3350509349111303326 34} index 34
+2024/06/24 15:20:18 1 accept msg index 34 op {0 map[504:[4a 4b 4c]] [] 0 0 0 3350509349111303326 34}
+2024/06/24 15:20:18 1 Join map[504:[4a 4b 4c]] seqid 34
+2024/06/24 15:20:18 1 snapshot leader 0 index 33 snapshotlastindex 22 term 10
+2024/06/24 15:20:18 2 apply {3 map[] [] 0 0 -1 3350509349111303326 35} index 35
+2024/06/24 15:20:18 2 accept msg index 35 op {3 map[] [] 0 0 -1 3350509349111303326 35}
+2024/06/24 15:20:18 2 Query cfg {6 [504 504 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 35
+2024/06/24 15:20:18 2 snapshot leader 0 index 34 snapshotlastindex 22 term 10
+2024/06/24 15:20:18 1 commit index 35 argcommit 35 leader 0
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 1 end 35
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 0 end 35
+2024/06/24 15:20:18 1 apply {3 map[] [] 0 0 -1 3350509349111303326 35} index 35
+2024/06/24 15:20:18 1 accept msg index 35 op {3 map[] [] 0 0 -1 3350509349111303326 35}
+2024/06/24 15:20:18 1 Query cfg {6 [504 504 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 35
+2024/06/24 15:20:18 0 commit index 36
+2024/06/24 15:20:18 0 apply {2 map[] [] 0 503 0 3350509349111303326 36} index 36
+2024/06/24 15:20:18 0 accept msg index 36 op {2 map[] [] 0 503 0 3350509349111303326 36}
+2024/06/24 15:20:18 0 Move shard 0 to gid 503 seqid 36
+2024/06/24 15:20:18 0 start command {3 map[] [] 0 0 -1 3350509349111303326 37}
+2024/06/24 15:20:18 1 commit index 36 argcommit 36 leader 0
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 2 end 36
+2024/06/24 15:20:18 2 commit index 36 argcommit 36 leader 0
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 1 end 36
+2024/06/24 15:20:18 2 apply {2 map[] [] 0 503 0 3350509349111303326 36} index 36
+2024/06/24 15:20:18 2 accept msg index 36 op {2 map[] [] 0 503 0 3350509349111303326 36}
+2024/06/24 15:20:18 2 Move shard 0 to gid 503 seqid 36
+2024/06/24 15:20:18 1 apply {2 map[] [] 0 503 0 3350509349111303326 36} index 36
+2024/06/24 15:20:18 1 accept msg index 36 op {2 map[] [] 0 503 0 3350509349111303326 36}
+2024/06/24 15:20:18 1 Move shard 0 to gid 503 seqid 36
+2024/06/24 15:20:18 0 commit index 37
+2024/06/24 15:20:18 0 apply {3 map[] [] 0 0 -1 3350509349111303326 37} index 37
+2024/06/24 15:20:18 0 accept msg index 37 op {3 map[] [] 0 0 -1 3350509349111303326 37}
+2024/06/24 15:20:18 0 Query cfg {7 [503 504 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 37
+2024/06/24 15:20:18 0 start command {3 map[] [] 0 0 -1 3350509349111303326 38}
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 3 end 37
+2024/06/24 15:20:18 1 commit index 37 argcommit 37 leader 0
+2024/06/24 15:20:18 2 commit index 37 argcommit 37 leader 0
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 2 end 37
+2024/06/24 15:20:18 1 apply {3 map[] [] 0 0 -1 3350509349111303326 37} index 37
+2024/06/24 15:20:18 1 accept msg index 37 op {3 map[] [] 0 0 -1 3350509349111303326 37}
+2024/06/24 15:20:18 1 Query cfg {7 [503 504 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 37
+2024/06/24 15:20:18 2 apply {3 map[] [] 0 0 -1 3350509349111303326 37} index 37
+2024/06/24 15:20:18 2 accept msg index 37 op {3 map[] [] 0 0 -1 3350509349111303326 37}
+2024/06/24 15:20:18 2 Query cfg {7 [503 504 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 37
+2024/06/24 15:20:18 0 commit index 38
+2024/06/24 15:20:18 0 apply {3 map[] [] 0 0 -1 3350509349111303326 38} index 38
+2024/06/24 15:20:18 0 accept msg index 38 op {3 map[] [] 0 0 -1 3350509349111303326 38}
+2024/06/24 15:20:18 0 Query cfg {7 [503 504 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 38
+2024/06/24 15:20:18 0 start command {2 map[] [] 1 503 0 3350509349111303326 39}
+2024/06/24 15:20:18 1 commit index 38 argcommit 38 leader 0
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 4 end 38
+2024/06/24 15:20:18 2 commit index 38 argcommit 38 leader 0
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 3 end 38
+2024/06/24 15:20:18 2 apply {3 map[] [] 0 0 -1 3350509349111303326 38} index 38
+2024/06/24 15:20:18 2 accept msg index 38 op {3 map[] [] 0 0 -1 3350509349111303326 38}
+2024/06/24 15:20:18 2 Query cfg {7 [503 504 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 38
+2024/06/24 15:20:18 1 apply {3 map[] [] 0 0 -1 3350509349111303326 38} index 38
+2024/06/24 15:20:18 1 accept msg index 38 op {3 map[] [] 0 0 -1 3350509349111303326 38}
+2024/06/24 15:20:18 1 Query cfg {7 [503 504 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 38
+2024/06/24 15:20:18 0 commit index 39
+2024/06/24 15:20:18 0 apply {2 map[] [] 1 503 0 3350509349111303326 39} index 39
+2024/06/24 15:20:18 0 accept msg index 39 op {2 map[] [] 1 503 0 3350509349111303326 39}
+2024/06/24 15:20:18 0 Move shard 1 to gid 503 seqid 39
+2024/06/24 15:20:18 0 start command {3 map[] [] 0 0 -1 3350509349111303326 40}
+2024/06/24 15:20:18 1 commit index 39 argcommit 39 leader 0
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 5 end 39
+2024/06/24 15:20:18 2 commit index 39 argcommit 39 leader 0
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 4 end 39
+2024/06/24 15:20:18 2 apply {2 map[] [] 1 503 0 3350509349111303326 39} index 39
+2024/06/24 15:20:18 2 accept msg index 39 op {2 map[] [] 1 503 0 3350509349111303326 39}
+2024/06/24 15:20:18 2 Move shard 1 to gid 503 seqid 39
+2024/06/24 15:20:18 1 apply {2 map[] [] 1 503 0 3350509349111303326 39} index 39
+2024/06/24 15:20:18 1 accept msg index 39 op {2 map[] [] 1 503 0 3350509349111303326 39}
+2024/06/24 15:20:18 1 Move shard 1 to gid 503 seqid 39
+2024/06/24 15:20:18 0 commit index 40
+2024/06/24 15:20:18 0 apply {3 map[] [] 0 0 -1 3350509349111303326 40} index 40
+2024/06/24 15:20:18 0 accept msg index 40 op {3 map[] [] 0 0 -1 3350509349111303326 40}
+2024/06/24 15:20:18 0 Query cfg {8 [503 503 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 40
+2024/06/24 15:20:18 0 start command {3 map[] [] 0 0 -1 3350509349111303326 41}
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 6 end 40
+2024/06/24 15:20:18 1 commit index 40 argcommit 40 leader 0
+2024/06/24 15:20:18 1 apply {3 map[] [] 0 0 -1 3350509349111303326 40} index 40
+2024/06/24 15:20:18 1 accept msg index 40 op {3 map[] [] 0 0 -1 3350509349111303326 40}
+2024/06/24 15:20:18 1 Query cfg {8 [503 503 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 40
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 5 end 40
+2024/06/24 15:20:18 2 commit index 40 argcommit 40 leader 0
+2024/06/24 15:20:18 2 apply {3 map[] [] 0 0 -1 3350509349111303326 40} index 40
+2024/06/24 15:20:18 2 accept msg index 40 op {3 map[] [] 0 0 -1 3350509349111303326 40}
+2024/06/24 15:20:18 2 Query cfg {8 [503 503 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 40
+2024/06/24 15:20:18 0 commit index 41
+2024/06/24 15:20:18 0 apply {3 map[] [] 0 0 -1 3350509349111303326 41} index 41
+2024/06/24 15:20:18 0 accept msg index 41 op {3 map[] [] 0 0 -1 3350509349111303326 41}
+2024/06/24 15:20:18 0 Query cfg {8 [503 503 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 41
+2024/06/24 15:20:18 0 start command {2 map[] [] 2 503 0 3350509349111303326 42}
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 7 end 41
+2024/06/24 15:20:18 1 commit index 41 argcommit 41 leader 0
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 6 end 41
+2024/06/24 15:20:18 2 commit index 41 argcommit 41 leader 0
+2024/06/24 15:20:18 2 apply {3 map[] [] 0 0 -1 3350509349111303326 41} index 41
+2024/06/24 15:20:18 2 accept msg index 41 op {3 map[] [] 0 0 -1 3350509349111303326 41}
+2024/06/24 15:20:18 2 Query cfg {8 [503 503 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 41
+2024/06/24 15:20:18 1 apply {3 map[] [] 0 0 -1 3350509349111303326 41} index 41
+2024/06/24 15:20:18 1 accept msg index 41 op {3 map[] [] 0 0 -1 3350509349111303326 41}
+2024/06/24 15:20:18 1 Query cfg {8 [503 503 504 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 41
+2024/06/24 15:20:18 0 commit index 42
+2024/06/24 15:20:18 0 apply {2 map[] [] 2 503 0 3350509349111303326 42} index 42
+2024/06/24 15:20:18 0 accept msg index 42 op {2 map[] [] 2 503 0 3350509349111303326 42}
+2024/06/24 15:20:18 0 Move shard 2 to gid 503 seqid 42
+2024/06/24 15:20:18 0 start command {3 map[] [] 0 0 -1 3350509349111303326 43}
+2024/06/24 15:20:18 1 commit index 42 argcommit 42 leader 0
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 8 end 42
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 7 end 42
+2024/06/24 15:20:18 2 commit index 42 argcommit 42 leader 0
+2024/06/24 15:20:18 1 apply {2 map[] [] 2 503 0 3350509349111303326 42} index 42
+2024/06/24 15:20:18 1 accept msg index 42 op {2 map[] [] 2 503 0 3350509349111303326 42}
+2024/06/24 15:20:18 1 Move shard 2 to gid 503 seqid 42
+2024/06/24 15:20:18 2 apply {2 map[] [] 2 503 0 3350509349111303326 42} index 42
+2024/06/24 15:20:18 2 accept msg index 42 op {2 map[] [] 2 503 0 3350509349111303326 42}
+2024/06/24 15:20:18 2 Move shard 2 to gid 503 seqid 42
+2024/06/24 15:20:18 0 commit index 43
+2024/06/24 15:20:18 0 apply {3 map[] [] 0 0 -1 3350509349111303326 43} index 43
+2024/06/24 15:20:18 0 accept msg index 43 op {3 map[] [] 0 0 -1 3350509349111303326 43}
+2024/06/24 15:20:18 0 Query cfg {9 [503 503 503 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 43
+2024/06/24 15:20:18 0 start command {3 map[] [] 0 0 -1 3350509349111303326 44}
+2024/06/24 15:20:18 1 commit index 43 argcommit 43 leader 0
+2024/06/24 15:20:18 1 change log leader 0 term 10 start 9 end 43
+2024/06/24 15:20:18 2 change log leader 0 term 10 start 8 end 43
+2024/06/24 15:20:18 2 commit index 43 argcommit 43 leader 0
+2024/06/24 15:20:18 2 apply {3 map[] [] 0 0 -1 3350509349111303326 43} index 43
+2024/06/24 15:20:18 2 accept msg index 43 op {3 map[] [] 0 0 -1 3350509349111303326 43}
+2024/06/24 15:20:18 2 Query cfg {9 [503 503 503 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 43
+2024/06/24 15:20:18 1 apply {3 map[] [] 0 0 -1 3350509349111303326 43} index 43
+2024/06/24 15:20:18 1 accept msg index 43 op {3 map[] [] 0 0 -1 3350509349111303326 43}
+2024/06/24 15:20:18 1 Query cfg {9 [503 503 503 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 43
+2024/06/24 15:20:19 0 commit index 44
+2024/06/24 15:20:19 0 apply {3 map[] [] 0 0 -1 3350509349111303326 44} index 44
+2024/06/24 15:20:19 0 accept msg index 44 op {3 map[] [] 0 0 -1 3350509349111303326 44}
+2024/06/24 15:20:19 0 Query cfg {9 [503 503 503 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 44
+2024/06/24 15:20:19 0 start command {2 map[] [] 3 503 0 3350509349111303326 45}
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 9 end 44
+2024/06/24 15:20:19 2 commit index 44 argcommit 44 leader 0
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 10 end 44
+2024/06/24 15:20:19 1 commit index 44 argcommit 44 leader 0
+2024/06/24 15:20:19 2 apply {3 map[] [] 0 0 -1 3350509349111303326 44} index 44
+2024/06/24 15:20:19 2 accept msg index 44 op {3 map[] [] 0 0 -1 3350509349111303326 44}
+2024/06/24 15:20:19 2 Query cfg {9 [503 503 503 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 44
+2024/06/24 15:20:19 1 apply {3 map[] [] 0 0 -1 3350509349111303326 44} index 44
+2024/06/24 15:20:19 1 accept msg index 44 op {3 map[] [] 0 0 -1 3350509349111303326 44}
+2024/06/24 15:20:19 1 Query cfg {9 [503 503 503 504 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 44
+2024/06/24 15:20:19 0 commit index 45
+2024/06/24 15:20:19 0 apply {2 map[] [] 3 503 0 3350509349111303326 45} index 45
+2024/06/24 15:20:19 0 accept msg index 45 op {2 map[] [] 3 503 0 3350509349111303326 45}
+2024/06/24 15:20:19 0 Move shard 3 to gid 503 seqid 45
+2024/06/24 15:20:19 0 start command {3 map[] [] 0 0 -1 3350509349111303326 46}
+2024/06/24 15:20:19 1 commit index 45 argcommit 45 leader 0
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 10 end 45
+2024/06/24 15:20:19 2 commit index 45 argcommit 45 leader 0
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 11 end 45
+2024/06/24 15:20:19 1 apply {2 map[] [] 3 503 0 3350509349111303326 45} index 45
+2024/06/24 15:20:19 1 accept msg index 45 op {2 map[] [] 3 503 0 3350509349111303326 45}
+2024/06/24 15:20:19 1 Move shard 3 to gid 503 seqid 45
+2024/06/24 15:20:19 1 snapshot leader 0 index 44 snapshotlastindex 33 term 10
+2024/06/24 15:20:19 2 apply {2 map[] [] 3 503 0 3350509349111303326 45} index 45
+2024/06/24 15:20:19 2 accept msg index 45 op {2 map[] [] 3 503 0 3350509349111303326 45}
+2024/06/24 15:20:19 2 Move shard 3 to gid 503 seqid 45
+2024/06/24 15:20:19 0 commit index 46
+2024/06/24 15:20:19 0 apply {3 map[] [] 0 0 -1 3350509349111303326 46} index 46
+2024/06/24 15:20:19 0 accept msg index 46 op {3 map[] [] 0 0 -1 3350509349111303326 46}
+2024/06/24 15:20:19 0 Query cfg {10 [503 503 503 503 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 46
+2024/06/24 15:20:19 0 start command {3 map[] [] 0 0 -1 3350509349111303326 47}
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 11 end 46
+2024/06/24 15:20:19 2 commit index 46 argcommit 46 leader 0
+2024/06/24 15:20:19 1 commit index 46 argcommit 46 leader 0
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 1 end 46
+2024/06/24 15:20:19 2 apply {3 map[] [] 0 0 -1 3350509349111303326 46} index 46
+2024/06/24 15:20:19 2 accept msg index 46 op {3 map[] [] 0 0 -1 3350509349111303326 46}
+2024/06/24 15:20:19 2 Query cfg {10 [503 503 503 503 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 46
+2024/06/24 15:20:19 2 snapshot leader 0 index 45 snapshotlastindex 34 term 10
+2024/06/24 15:20:19 1 apply {3 map[] [] 0 0 -1 3350509349111303326 46} index 46
+2024/06/24 15:20:19 1 accept msg index 46 op {3 map[] [] 0 0 -1 3350509349111303326 46}
+2024/06/24 15:20:19 1 Query cfg {10 [503 503 503 503 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 46
+2024/06/24 15:20:19 0 commit index 47
+2024/06/24 15:20:19 0 apply {3 map[] [] 0 0 -1 3350509349111303326 47} index 47
+2024/06/24 15:20:19 0 accept msg index 47 op {3 map[] [] 0 0 -1 3350509349111303326 47}
+2024/06/24 15:20:19 0 Query cfg {10 [503 503 503 503 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 47
+2024/06/24 15:20:19 0 snapshot leader 0 index 46 snapshotlastindex 34 term 10
+2024/06/24 15:20:19 0 start command {2 map[] [] 4 503 0 3350509349111303326 48}
+2024/06/24 15:20:19 1 commit index 47 argcommit 47 leader 0
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 1 end 47
+2024/06/24 15:20:19 2 commit index 47 argcommit 47 leader 0
+2024/06/24 15:20:19 1 apply {3 map[] [] 0 0 -1 3350509349111303326 47} index 47
+2024/06/24 15:20:19 1 accept msg index 47 op {3 map[] [] 0 0 -1 3350509349111303326 47}
+2024/06/24 15:20:19 1 Query cfg {10 [503 503 503 503 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 47
+2024/06/24 15:20:19 2 apply {3 map[] [] 0 0 -1 3350509349111303326 47} index 47
+2024/06/24 15:20:19 2 accept msg index 47 op {3 map[] [] 0 0 -1 3350509349111303326 47}
+2024/06/24 15:20:19 2 Query cfg {10 [503 503 503 503 504 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 47
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 2 end 47
+2024/06/24 15:20:19 0 commit index 48
+2024/06/24 15:20:19 0 apply {2 map[] [] 4 503 0 3350509349111303326 48} index 48
+2024/06/24 15:20:19 0 accept msg index 48 op {2 map[] [] 4 503 0 3350509349111303326 48}
+2024/06/24 15:20:19 0 Move shard 4 to gid 503 seqid 48
+2024/06/24 15:20:19 0 start command {3 map[] [] 0 0 -1 3350509349111303326 49}
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 2 end 48
+2024/06/24 15:20:19 2 commit index 48 argcommit 48 leader 0
+2024/06/24 15:20:19 1 commit index 48 argcommit 48 leader 0
+2024/06/24 15:20:19 1 apply {2 map[] [] 4 503 0 3350509349111303326 48} index 48
+2024/06/24 15:20:19 1 accept msg index 48 op {2 map[] [] 4 503 0 3350509349111303326 48}
+2024/06/24 15:20:19 1 Move shard 4 to gid 503 seqid 48
+2024/06/24 15:20:19 2 apply {2 map[] [] 4 503 0 3350509349111303326 48} index 48
+2024/06/24 15:20:19 2 accept msg index 48 op {2 map[] [] 4 503 0 3350509349111303326 48}
+2024/06/24 15:20:19 2 Move shard 4 to gid 503 seqid 48
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 3 end 48
+2024/06/24 15:20:19 0 commit index 49
+2024/06/24 15:20:19 0 apply {3 map[] [] 0 0 -1 3350509349111303326 49} index 49
+2024/06/24 15:20:19 0 accept msg index 49 op {3 map[] [] 0 0 -1 3350509349111303326 49}
+2024/06/24 15:20:19 0 Query cfg {11 [503 503 503 503 503 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 49
+2024/06/24 15:20:19 0 start command {3 map[] [] 0 0 -1 3350509349111303326 50}
+2024/06/24 15:20:19 1 commit index 49 argcommit 49 leader 0
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 3 end 49
+2024/06/24 15:20:19 2 commit index 49 argcommit 49 leader 0
+2024/06/24 15:20:19 2 apply {3 map[] [] 0 0 -1 3350509349111303326 49} index 49
+2024/06/24 15:20:19 2 accept msg index 49 op {3 map[] [] 0 0 -1 3350509349111303326 49}
+2024/06/24 15:20:19 2 Query cfg {11 [503 503 503 503 503 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 49
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 4 end 49
+2024/06/24 15:20:19 1 apply {3 map[] [] 0 0 -1 3350509349111303326 49} index 49
+2024/06/24 15:20:19 1 accept msg index 49 op {3 map[] [] 0 0 -1 3350509349111303326 49}
+2024/06/24 15:20:19 1 Query cfg {11 [503 503 503 503 503 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 49
+2024/06/24 15:20:19 0 commit index 50
+2024/06/24 15:20:19 0 apply {3 map[] [] 0 0 -1 3350509349111303326 50} index 50
+2024/06/24 15:20:19 0 accept msg index 50 op {3 map[] [] 0 0 -1 3350509349111303326 50}
+2024/06/24 15:20:19 0 Query cfg {11 [503 503 503 503 503 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 50
+2024/06/24 15:20:19 0 start command {2 map[] [] 5 504 0 3350509349111303326 51}
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 4 end 50
+2024/06/24 15:20:19 2 commit index 50 argcommit 50 leader 0
+2024/06/24 15:20:19 1 commit index 50 argcommit 50 leader 0
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 5 end 50
+2024/06/24 15:20:19 2 apply {3 map[] [] 0 0 -1 3350509349111303326 50} index 50
+2024/06/24 15:20:19 2 accept msg index 50 op {3 map[] [] 0 0 -1 3350509349111303326 50}
+2024/06/24 15:20:19 2 Query cfg {11 [503 503 503 503 503 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 50
+2024/06/24 15:20:19 1 apply {3 map[] [] 0 0 -1 3350509349111303326 50} index 50
+2024/06/24 15:20:19 1 accept msg index 50 op {3 map[] [] 0 0 -1 3350509349111303326 50}
+2024/06/24 15:20:19 1 Query cfg {11 [503 503 503 503 503 503 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 50
+2024/06/24 15:20:19 0 commit index 51
+2024/06/24 15:20:19 0 apply {2 map[] [] 5 504 0 3350509349111303326 51} index 51
+2024/06/24 15:20:19 0 accept msg index 51 op {2 map[] [] 5 504 0 3350509349111303326 51}
+2024/06/24 15:20:19 0 Move shard 5 to gid 504 seqid 51
+2024/06/24 15:20:19 0 start command {3 map[] [] 0 0 -1 3350509349111303326 52}
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 5 end 51
+2024/06/24 15:20:19 2 commit index 51 argcommit 51 leader 0
+2024/06/24 15:20:19 1 commit index 51 argcommit 51 leader 0
+2024/06/24 15:20:19 1 apply {2 map[] [] 5 504 0 3350509349111303326 51} index 51
+2024/06/24 15:20:19 1 accept msg index 51 op {2 map[] [] 5 504 0 3350509349111303326 51}
+2024/06/24 15:20:19 1 Move shard 5 to gid 504 seqid 51
+2024/06/24 15:20:19 2 apply {2 map[] [] 5 504 0 3350509349111303326 51} index 51
+2024/06/24 15:20:19 2 accept msg index 51 op {2 map[] [] 5 504 0 3350509349111303326 51}
+2024/06/24 15:20:19 2 Move shard 5 to gid 504 seqid 51
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 6 end 51
+2024/06/24 15:20:19 0 commit index 52
+2024/06/24 15:20:19 0 apply {3 map[] [] 0 0 -1 3350509349111303326 52} index 52
+2024/06/24 15:20:19 0 accept msg index 52 op {3 map[] [] 0 0 -1 3350509349111303326 52}
+2024/06/24 15:20:19 0 Query cfg {12 [503 503 503 503 503 504 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 52
+2024/06/24 15:20:19 0 start command {3 map[] [] 0 0 -1 3350509349111303326 53}
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 6 end 52
+2024/06/24 15:20:19 2 commit index 52 argcommit 52 leader 0
+2024/06/24 15:20:19 1 commit index 52 argcommit 52 leader 0
+2024/06/24 15:20:19 2 apply {3 map[] [] 0 0 -1 3350509349111303326 52} index 52
+2024/06/24 15:20:19 2 accept msg index 52 op {3 map[] [] 0 0 -1 3350509349111303326 52}
+2024/06/24 15:20:19 2 Query cfg {12 [503 503 503 503 503 504 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 52
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 7 end 52
+2024/06/24 15:20:19 1 apply {3 map[] [] 0 0 -1 3350509349111303326 52} index 52
+2024/06/24 15:20:19 1 accept msg index 52 op {3 map[] [] 0 0 -1 3350509349111303326 52}
+2024/06/24 15:20:19 1 Query cfg {12 [503 503 503 503 503 504 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 52
+2024/06/24 15:20:19 0 commit index 53
+2024/06/24 15:20:19 0 apply {3 map[] [] 0 0 -1 3350509349111303326 53} index 53
+2024/06/24 15:20:19 0 accept msg index 53 op {3 map[] [] 0 0 -1 3350509349111303326 53}
+2024/06/24 15:20:19 0 Query cfg {12 [503 503 503 503 503 504 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 53
+2024/06/24 15:20:19 0 start command {2 map[] [] 6 504 0 3350509349111303326 54}
+2024/06/24 15:20:19 2 change log leader 0 term 10 start 7 end 53
+2024/06/24 15:20:19 2 commit index 53 argcommit 53 leader 0
+2024/06/24 15:20:19 1 commit index 53 argcommit 53 leader 0
+2024/06/24 15:20:19 1 change log leader 0 term 10 start 8 end 53
+2024/06/24 15:20:19 2 apply {3 map[] [] 0 0 -1 3350509349111303326 53} index 53
+2024/06/24 15:20:19 2 accept msg index 53 op {3 map[] [] 0 0 -1 3350509349111303326 53}
+2024/06/24 15:20:19 2 Query cfg {12 [503 503 503 503 503 504 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 53
+2024/06/24 15:20:19 1 apply {3 map[] [] 0 0 -1 3350509349111303326 53} index 53
+2024/06/24 15:20:19 1 accept msg index 53 op {3 map[] [] 0 0 -1 3350509349111303326 53}
+2024/06/24 15:20:19 1 Query cfg {12 [503 503 503 503 503 504 503 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 53
+2024/06/24 15:20:20 0 commit index 54
+2024/06/24 15:20:20 0 apply {2 map[] [] 6 504 0 3350509349111303326 54} index 54
+2024/06/24 15:20:20 0 accept msg index 54 op {2 map[] [] 6 504 0 3350509349111303326 54}
+2024/06/24 15:20:20 0 Move shard 6 to gid 504 seqid 54
+2024/06/24 15:20:20 0 start command {3 map[] [] 0 0 -1 3350509349111303326 55}
+2024/06/24 15:20:20 1 commit index 54 argcommit 54 leader 0
+2024/06/24 15:20:20 2 change log leader 0 term 10 start 8 end 54
+2024/06/24 15:20:20 2 commit index 54 argcommit 54 leader 0
+2024/06/24 15:20:20 2 apply {2 map[] [] 6 504 0 3350509349111303326 54} index 54
+2024/06/24 15:20:20 2 accept msg index 54 op {2 map[] [] 6 504 0 3350509349111303326 54}
+2024/06/24 15:20:20 2 Move shard 6 to gid 504 seqid 54
+2024/06/24 15:20:20 1 apply {2 map[] [] 6 504 0 3350509349111303326 54} index 54
+2024/06/24 15:20:20 1 accept msg index 54 op {2 map[] [] 6 504 0 3350509349111303326 54}
+2024/06/24 15:20:20 1 Move shard 6 to gid 504 seqid 54
+2024/06/24 15:20:20 1 change log leader 0 term 10 start 9 end 54
+2024/06/24 15:20:20 0 commit index 55
+2024/06/24 15:20:20 0 apply {3 map[] [] 0 0 -1 3350509349111303326 55} index 55
+2024/06/24 15:20:20 0 accept msg index 55 op {3 map[] [] 0 0 -1 3350509349111303326 55}
+2024/06/24 15:20:20 0 Query cfg {13 [503 503 503 503 503 504 504 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 55
+2024/06/24 15:20:20 0 start command {3 map[] [] 0 0 -1 3350509349111303326 56}
+2024/06/24 15:20:20 1 commit index 55 argcommit 55 leader 0
+2024/06/24 15:20:20 2 commit index 55 argcommit 55 leader 0
+2024/06/24 15:20:20 1 apply {3 map[] [] 0 0 -1 3350509349111303326 55} index 55
+2024/06/24 15:20:20 1 accept msg index 55 op {3 map[] [] 0 0 -1 3350509349111303326 55}
+2024/06/24 15:20:20 1 Query cfg {13 [503 503 503 503 503 504 504 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 55
+2024/06/24 15:20:20 2 change log leader 0 term 10 start 9 end 55
+2024/06/24 15:20:20 1 change log leader 0 term 10 start 10 end 55
+2024/06/24 15:20:20 2 apply {3 map[] [] 0 0 -1 3350509349111303326 55} index 55
+2024/06/24 15:20:20 2 accept msg index 55 op {3 map[] [] 0 0 -1 3350509349111303326 55}
+2024/06/24 15:20:20 2 Query cfg {13 [503 503 503 503 503 504 504 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 55
+2024/06/24 15:20:20 0 commit index 56
+2024/06/24 15:20:20 0 apply {3 map[] [] 0 0 -1 3350509349111303326 56} index 56
+2024/06/24 15:20:20 0 accept msg index 56 op {3 map[] [] 0 0 -1 3350509349111303326 56}
+2024/06/24 15:20:20 0 Query cfg {13 [503 503 503 503 503 504 504 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 56
+2024/06/24 15:20:20 0 start command {2 map[] [] 7 504 0 3350509349111303326 57}
+2024/06/24 15:20:20 1 commit index 56 argcommit 56 leader 0
+2024/06/24 15:20:20 2 commit index 56 argcommit 56 leader 0
+2024/06/24 15:20:20 2 change log leader 0 term 10 start 10 end 56
+2024/06/24 15:20:20 1 apply {3 map[] [] 0 0 -1 3350509349111303326 56} index 56
+2024/06/24 15:20:20 1 accept msg index 56 op {3 map[] [] 0 0 -1 3350509349111303326 56}
+2024/06/24 15:20:20 1 Query cfg {13 [503 503 503 503 503 504 504 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 56
+2024/06/24 15:20:20 2 apply {3 map[] [] 0 0 -1 3350509349111303326 56} index 56
+2024/06/24 15:20:20 2 accept msg index 56 op {3 map[] [] 0 0 -1 3350509349111303326 56}
+2024/06/24 15:20:20 2 Query cfg {13 [503 503 503 503 503 504 504 503 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 56
+2024/06/24 15:20:20 1 change log leader 0 term 10 start 11 end 56
+2024/06/24 15:20:20 0 commit index 57
+2024/06/24 15:20:20 0 apply {2 map[] [] 7 504 0 3350509349111303326 57} index 57
+2024/06/24 15:20:20 0 accept msg index 57 op {2 map[] [] 7 504 0 3350509349111303326 57}
+2024/06/24 15:20:20 0 Move shard 7 to gid 504 seqid 57
+2024/06/24 15:20:20 0 start command {3 map[] [] 0 0 -1 3350509349111303326 58}
+2024/06/24 15:20:20 1 commit index 57 argcommit 57 leader 0
+2024/06/24 15:20:20 2 commit index 57 argcommit 57 leader 0
+2024/06/24 15:20:20 2 change log leader 0 term 10 start 11 end 57
+2024/06/24 15:20:20 1 apply {2 map[] [] 7 504 0 3350509349111303326 57} index 57
+2024/06/24 15:20:20 1 accept msg index 57 op {2 map[] [] 7 504 0 3350509349111303326 57}
+2024/06/24 15:20:20 1 Move shard 7 to gid 504 seqid 57
+2024/06/24 15:20:20 1 snapshot leader 0 index 56 snapshotlastindex 44 term 10
+2024/06/24 15:20:20 2 apply {2 map[] [] 7 504 0 3350509349111303326 57} index 57
+2024/06/24 15:20:20 2 accept msg index 57 op {2 map[] [] 7 504 0 3350509349111303326 57}
+2024/06/24 15:20:20 2 Move shard 7 to gid 504 seqid 57
+2024/06/24 15:20:20 2 snapshot leader 0 index 56 snapshotlastindex 45 term 10
+2024/06/24 15:20:20 1 change log leader 0 term 10 start 0 end 57
+2024/06/24 15:20:20 0 commit index 58
+2024/06/24 15:20:20 0 apply {3 map[] [] 0 0 -1 3350509349111303326 58} index 58
+2024/06/24 15:20:20 0 accept msg index 58 op {3 map[] [] 0 0 -1 3350509349111303326 58}
+2024/06/24 15:20:20 0 Query cfg {14 [503 503 503 503 503 504 504 504 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 58
+2024/06/24 15:20:20 0 start command {3 map[] [] 0 0 -1 3350509349111303326 59}
+2024/06/24 15:20:20 1 commit index 58 argcommit 58 leader 0
+2024/06/24 15:20:20 2 commit index 58 argcommit 58 leader 0
+2024/06/24 15:20:20 2 change log leader 0 term 10 start 1 end 58
+2024/06/24 15:20:20 0 commit index 59
+2024/06/24 15:20:20 0 apply {3 map[] [] 0 0 -1 3350509349111303326 59} index 59
+2024/06/24 15:20:20 0 accept msg index 59 op {3 map[] [] 0 0 -1 3350509349111303326 59}
+2024/06/24 15:20:20 0 Query cfg {14 [503 503 503 503 503 504 504 504 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 59
+2024/06/24 15:20:20 1 apply {3 map[] [] 0 0 -1 3350509349111303326 58} index 58
+2024/06/24 15:20:20 2 apply {3 map[] [] 0 0 -1 3350509349111303326 58} index 58
+2024/06/24 15:20:20 2 accept msg index 58 op {3 map[] [] 0 0 -1 3350509349111303326 58}
+2024/06/24 15:20:20 2 Query cfg {14 [503 503 503 503 503 504 504 504 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 58
+2024/06/24 15:20:20 0 snapshot leader 0 index 58 snapshotlastindex 46 term 10
+2024/06/24 15:20:20 0 start command {2 map[] [] 8 504 0 3350509349111303326 60}
+2024/06/24 15:20:20 1 installsnapshot leader 0 index 59 leader term 10 term 10
+2024/06/24 15:20:20 1 accept msg index 58 op {3 map[] [] 0 0 -1 3350509349111303326 58}
+2024/06/24 15:20:20 1 Query cfg {14 [503 503 503 503 503 504 504 504 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 58
+2024/06/24 15:20:20 2 commit index 59 argcommit 59 leader 0
+2024/06/24 15:20:20 2 change log leader 0 term 10 start 2 end 59
+2024/06/24 15:20:20 2 apply {3 map[] [] 0 0 -1 3350509349111303326 59} index 59
+2024/06/24 15:20:20 2 accept msg index 59 op {3 map[] [] 0 0 -1 3350509349111303326 59}
+2024/06/24 15:20:20 2 Query cfg {14 [503 503 503 503 503 504 504 504 503 503] map[503:[3a 3b 3c] 504:[4a 4b 4c]]} seqid 59
+2024/06/24 15:20:20 0 commit index 60
+2024/06/24 15:20:20 0 apply {2 map[] [] 8 504 0 3350509349111303326 60} index 60
+2024/06/24 15:20:20 0 accept msg index 60 op {2 map[] [] 8 504 0 3350509349111303326 60}
+2024/06/24 15:20:20 0 Move shard 8 to gid 504 seqid 60
+2024/06/24 15:20:20 2 commit index 60 argcommit 60 leader 0
+2024/06/24 15:20:20 2 apply {2 map[] [] 8 504 0 3350509349111303326 60} index 60
+2024/06/24 15:20:20 2 accept msg index 60 op {2 map[] [] 8 504 0 3350509349111303326 60}
+2024/06/24 15:20:20 2 Move shard 8 to gid 504 seqid 60
+2024/06/24 15:20:21 1 timeout term 10 leader 0
+2024/06/24 15:20:21 1 timeout term 10 leader 0
+2024/06/24 15:20:22 1 timeout term 10 leader 0
+2024/06/24 15:20:22 1 timeout term 10 leader 0
+2024/06/24 15:20:23 1 timeout term 10 leader 0
+2024/06/24 15:20:24 1 timeout term 10 leader 0
+2024/06/24 15:20:24 1 timeout term 10 leader 0
+2024/06/24 15:20:25 1 timeout term 10 leader 0
+2024/06/24 15:20:26 1 timeout term 10 leader 0
+2024/06/24 15:20:26 1 timeout term 10 leader 0
+2024/06/24 15:20:27 1 timeout term 10 leader 0
+2024/06/24 15:20:27 1 timeout term 10 leader 0
+2024/06/24 15:20:28 1 timeout term 10 leader 0
+2024/06/24 15:20:28 1 timeout term 10 leader 0
+2024/06/24 15:20:29 1 timeout term 10 leader 0
+2024/06/24 15:20:30 1 timeout term 10 leader 0
+2024/06/24 15:20:30 1 timeout term 10 leader 0
+2024/06/24 15:20:31 1 timeout term 10 leader 0
+2024/06/24 15:20:31 1 timeout term 10 leader 0
+2024/06/24 15:20:32 1 timeout term 10 leader 0
+2024/06/24 15:20:32 1 timeout term 10 leader 0
+2024/06/24 15:20:33 1 timeout term 10 leader 0
+2024/06/24 15:20:33 1 timeout term 10 leader 0
+2024/06/24 15:20:34 1 timeout term 10 leader 0
+2024/06/24 15:20:35 1 timeout term 10 leader 0
+2024/06/24 15:20:35 1 timeout term 10 leader 0
+2024/06/24 15:20:36 1 timeout term 10 leader 0
+2024/06/24 15:20:36 1 timeout term 10 leader 0
+2024/06/24 15:20:37 1 timeout term 10 leader 0
+2024/06/24 15:20:37 1 timeout term 10 leader 0
+2024/06/24 15:20:38 1 timeout term 10 leader 0
+2024/06/24 15:20:39 1 timeout term 10 leader 0
+2024/06/24 15:20:39 1 timeout term 10 leader 0
+2024/06/24 15:20:40 1 timeout term 10 leader 0
+2024/06/24 15:20:40 1 timeout term 10 leader 0
+2024/06/24 15:20:41 1 timeout term 10 leader 0
+2024/06/24 15:20:42 1 timeout term 10 leader 0
+2024/06/24 15:20:42 1 timeout term 10 leader 0
+2024/06/24 15:20:43 1 timeout term 10 leader 0
+2024/06/24 15:20:43 1 timeout term 10 leader 0
+2024/06/24 15:20:44 1 timeout term 10 leader 0
+2024/06/24 15:20:44 1 timeout term 10 leader 0
+2024/06/24 15:20:45 1 timeout term 10 leader 0
+2024/06/24 15:20:45 1 timeout term 10 leader 0
+2024/06/24 15:20:46 1 timeout term 10 leader 0
+2024/06/24 15:20:47 1 timeout term 10 leader 0
+2024/06/24 15:20:47 1 timeout term 10 leader 0
+2024/06/24 15:20:48 1 timeout term 10 leader 0
+2024/06/24 15:20:48 1 timeout term 10 leader 0
+2024/06/24 15:20:49 1 timeout term 10 leader 0
+2024/06/24 15:20:49 1 timeout term 10 leader 0
+2024/06/24 15:20:50 1 timeout term 10 leader 0
+2024/06/24 15:20:50 1 timeout term 10 leader 0
+2024/06/24 15:20:51 1 timeout term 10 leader 0
+2024/06/24 15:20:52 1 timeout term 10 leader 0
+2024/06/24 15:20:52 1 timeout term 10 leader 0
+2024/06/24 15:20:53 1 timeout term 10 leader 0
+2024/06/24 15:20:53 1 timeout term 10 leader 0
+2024/06/24 15:20:54 1 timeout term 10 leader 0
+2024/06/24 15:20:54 1 timeout term 10 leader 0
+2024/06/24 15:20:55 1 timeout term 10 leader 0
+2024/06/24 15:20:56 1 timeout term 10 leader 0
+2024/06/24 15:20:56 1 timeout term 10 leader 0
+2024/06/24 15:20:57 1 timeout term 10 leader 0
+2024/06/24 15:20:57 1 timeout term 10 leader 0
+2024/06/24 15:20:58 1 timeout term 10 leader 0
+2024/06/24 15:20:58 1 timeout term 10 leader 0
+2024/06/24 15:20:59 1 timeout term 10 leader 0
+2024/06/24 15:21:00 1 timeout term 10 leader 0
+2024/06/24 15:21:00 1 timeout term 10 leader 0
+2024/06/24 15:21:01 1 timeout term 10 leader 0
+2024/06/24 15:21:02 1 timeout term 10 leader 0
+2024/06/24 15:21:02 1 timeout term 10 leader 0
+2024/06/24 15:21:03 1 timeout term 10 leader 0
+2024/06/24 15:21:04 1 timeout term 10 leader 0
+2024/06/24 15:21:04 1 timeout term 10 leader 0
+2024/06/24 15:21:05 1 timeout term 10 leader 0
+2024/06/24 15:21:05 1 timeout term 10 leader 0
+2024/06/24 15:21:06 1 timeout term 10 leader 0
+2024/06/24 15:21:06 1 timeout term 10 leader 0
+2024/06/24 15:21:07 1 timeout term 10 leader 0
+2024/06/24 15:21:08 1 timeout term 10 leader 0
+2024/06/24 15:21:08 1 timeout term 10 leader 0
+2024/06/24 15:21:09 1 timeout term 10 leader 0
+2024/06/24 15:21:10 1 timeout term 10 leader 0
+2024/06/24 15:21:10 1 timeout term 10 leader 0
+2024/06/24 15:21:11 1 timeout term 10 leader 0
+2024/06/24 15:21:11 1 timeout term 10 leader 0
+2024/06/24 15:21:12 1 timeout term 10 leader 0
+2024/06/24 15:21:12 1 timeout term 10 leader 0
+2024/06/24 15:21:13 1 timeout term 10 leader 0
+2024/06/24 15:21:13 1 timeout term 10 leader 0
+2024/06/24 15:21:14 1 timeout term 10 leader 0
+2024/06/24 15:21:14 1 timeout term 10 leader 0
+2024/06/24 15:21:15 1 timeout term 10 leader 0
+2024/06/24 15:21:16 1 timeout term 10 leader 0
+2024/06/24 15:21:16 1 timeout term 10 leader 0
+2024/06/24 15:21:17 1 timeout term 10 leader 0
+2024/06/24 15:21:18 1 timeout term 10 leader 0
+2024/06/24 15:21:18 1 timeout term 10 leader 0
+2024/06/24 15:21:19 1 timeout term 10 leader 0
+2024/06/24 15:21:20 1 timeout term 10 leader 0
+2024/06/24 15:21:20 1 timeout term 10 leader 0
+2024/06/24 15:21:21 1 timeout term 10 leader 0
+2024/06/24 15:21:21 1 timeout term 10 leader 0
+2024/06/24 15:21:22 1 timeout term 10 leader 0
+2024/06/24 15:21:23 1 timeout term 10 leader 0
+2024/06/24 15:21:24 1 timeout term 10 leader 0
+2024/06/24 15:21:24 1 timeout term 10 leader 0
+2024/06/24 15:21:25 1 timeout term 10 leader 0
+2024/06/24 15:21:25 1 timeout term 10 leader 0
+2024/06/24 15:21:26 1 timeout term 10 leader 0
+2024/06/24 15:21:26 1 timeout term 10 leader 0
+2024/06/24 15:21:27 1 timeout term 10 leader 0
+2024/06/24 15:21:28 1 timeout term 10 leader 0
+2024/06/24 15:21:28 1 timeout term 10 leader 0
+2024/06/24 15:21:29 1 timeout term 10 leader 0
+2024/06/24 15:21:29 1 timeout term 10 leader 0
+2024/06/24 15:21:30 1 timeout term 10 leader 0
+2024/06/24 15:21:31 1 timeout term 10 leader 0
+2024/06/24 15:21:31 1 timeout term 10 leader 0
+2024/06/24 15:21:32 1 timeout term 10 leader 0
+2024/06/24 15:21:32 1 timeout term 10 leader 0
+2024/06/24 15:21:33 1 timeout term 10 leader 0
+2024/06/24 15:21:34 1 timeout term 10 leader 0
+2024/06/24 15:21:34 1 timeout term 10 leader 0
+2024/06/24 15:21:35 1 timeout term 10 leader 0
+2024/06/24 15:21:35 1 timeout term 10 leader 0
+2024/06/24 15:21:36 1 timeout term 10 leader 0
+2024/06/24 15:21:36 1 timeout term 10 leader 0
+2024/06/24 15:21:37 1 timeout term 10 leader 0
+2024/06/24 15:21:38 1 timeout term 10 leader 0
+2024/06/24 15:21:38 1 timeout term 10 leader 0
+2024/06/24 15:21:39 1 timeout term 10 leader 0
+2024/06/24 15:21:39 1 timeout term 10 leader 0
+2024/06/24 15:21:40 1 timeout term 10 leader 0
+2024/06/24 15:21:41 1 timeout term 10 leader 0
+2024/06/24 15:21:41 1 timeout term 10 leader 0
+2024/06/24 15:21:42 1 timeout term 10 leader 0
+2024/06/24 15:21:42 1 timeout term 10 leader 0
+2024/06/24 15:21:43 1 timeout term 10 leader 0
+2024/06/24 15:21:43 1 timeout term 10 leader 0
+2024/06/24 15:21:44 1 timeout term 10 leader 0
+2024/06/24 15:21:45 1 timeout term 10 leader 0
+2024/06/24 15:21:45 1 timeout term 10 leader 0
+2024/06/24 15:21:46 1 timeout term 10 leader 0
+2024/06/24 15:21:47 1 timeout term 10 leader 0
+2024/06/24 15:21:47 1 timeout term 10 leader 0
+2024/06/24 15:21:48 1 timeout term 10 leader 0
+2024/06/24 15:21:48 1 timeout term 10 leader 0
+2024/06/24 15:21:49 1 timeout term 10 leader 0
+2024/06/24 15:21:50 1 timeout term 10 leader 0
+2024/06/24 15:21:50 1 timeout term 10 leader 0
+2024/06/24 15:21:51 1 timeout term 10 leader 0
+2024/06/24 15:21:51 1 timeout term 10 leader 0
+2024/06/24 15:21:52 1 timeout term 10 leader 0
+2024/06/24 15:21:52 1 timeout term 10 leader 0
+2024/06/24 15:21:53 1 timeout term 10 leader 0
+2024/06/24 15:21:54 1 timeout term 10 leader 0
+2024/06/24 15:21:54 1 timeout term 10 leader 0
+2024/06/24 15:21:55 1 timeout term 10 leader 0
+2024/06/24 15:21:56 1 timeout term 10 leader 0
+2024/06/24 15:21:56 1 timeout term 10 leader 0
+2024/06/24 15:21:57 1 timeout term 10 leader 0
+2024/06/24 15:21:57 1 timeout term 10 leader 0
+2024/06/24 15:21:58 1 timeout term 10 leader 0
+2024/06/24 15:21:58 1 timeout term 10 leader 0
+2024/06/24 15:21:59 1 timeout term 10 leader 0
+2024/06/24 15:22:00 1 timeout term 10 leader 0
+2024/06/24 15:22:00 1 timeout term 10 leader 0
+2024/06/24 15:22:01 1 timeout term 10 leader 0
+2024/06/24 15:22:01 1 timeout term 10 leader 0
+2024/06/24 15:22:02 1 timeout term 10 leader 0
+2024/06/24 15:22:03 1 timeout term 10 leader 0

@@ -1,0 +1,27 @@
+=== RUN   TestPersist12C
+Test (2C): basic persistence ...
+labgob warning: Decoding into a non-default variable/field Term may not work
+  ... Passed --   9.5  3  240   63123    9
+--- PASS: TestPersist12C (9.53s)
+=== RUN   TestPersist22C
+Test (2C): more persistence ...
+  ... Passed --  18.1  5 1329  288941   16
+--- PASS: TestPersist22C (18.07s)
+=== RUN   TestPersist32C
+Test (2C): partitioned leader and one follower crash, leader restarts ...
+  ... Passed --   3.3  3   86   20861    5
+--- PASS: TestPersist32C (3.34s)
+=== RUN   TestFigure82C
+Test (2C): Figure 8 ...
+  ... Passed --  38.9  5 5813  999847  185
+--- PASS: TestFigure82C (38.86s)
+=== RUN   TestUnreliableAgree2C
+Test (2C): unreliable agreement ...
+  ... Passed --   6.0  5  454  141890  246
+--- PASS: TestUnreliableAgree2C (5.97s)
+=== RUN   TestFigure8Unreliable2C
+Test (2C): Figure 8 (unreliable) ...
+  ... Passed --  42.5  5 6278 6692632  759
+--- PASS: TestFigure8Unreliable2C (42.51s)
+=== RUN   TestReliableChurn2C
+Test (2C): churn ...

@@ -32,6 +32,15 @@ const (
 	OK = "OK"
 )
 
+type OpType int
+
+const (
+	Join OpType = iota
+	Leave
+	Move
+	Query
+)
+
 type Err string
 
 type JoinArgs struct {

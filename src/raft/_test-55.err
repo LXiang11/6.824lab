@@ -1,0 +1,7 @@
+panic: runtime error: index out of range [50] with length 50
+
+goroutine 76423 [running]:
+6.5840/raft.(*Raft).applylog(0xc000bedc20)
+	/home/lx/6.824lab/src/raft/raft.go:908 +0x2b6
+created by 6.5840/raft.Make in goroutine 76417
+	/home/lx/6.824lab/src/raft/raft.go:1203 +0x345

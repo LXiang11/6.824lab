@@ -1,0 +1,3 @@
+=== RUN   TestConcurrent3
+Test: concurrent configuration change and restart...
+labgob warning: Decoding into a non-default variable/field Term may not work

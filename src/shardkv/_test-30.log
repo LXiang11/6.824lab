@@ -1,0 +1,27 @@
+=== RUN   TestStaticShards
+Test: static shards ...
+labgob warning: Decoding into a non-default variable/field Term may not work
+  ... Passed
+--- PASS: TestStaticShards (6.37s)
+=== RUN   TestJoinLeave
+Test: join then leave ...
+  ... Passed
+--- PASS: TestJoinLeave (9.91s)
+=== RUN   TestSnapshot
+Test: snapshots, join, and leave ...
+  ... Passed
+--- PASS: TestSnapshot (30.40s)
+=== RUN   TestMissChange
+Test: servers miss configuration changes...
+  ... Passed
+--- PASS: TestMissChange (21.65s)
+=== RUN   TestConcurrent1
+Test: concurrent puts and configuration changes...
+  ... Passed
+--- PASS: TestConcurrent1 (7.64s)
+=== RUN   TestConcurrent2
+Test: more concurrent puts and configuration changes...
+  ... Passed
+--- PASS: TestConcurrent2 (16.56s)
+=== RUN   TestConcurrent3
+Test: concurrent configuration change and restart...

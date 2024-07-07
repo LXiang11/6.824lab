@@ -8,12 +8,14 @@ const (
 
 type Err string
 
-type GetRaftStateArgs struct {
-}
+type OpType int
 
-type GetRaftStateReply struct {
-	IsLeader bool
-}
+const (
+	_Get OpType = iota
+	_Put
+	_Append
+	Nop
+)
 
 // Put or Append
 type PutAppendArgs struct {

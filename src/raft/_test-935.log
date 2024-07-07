@@ -1,0 +1,3 @@
+=== RUN   TestReliableChurn2C
+Test (2C): churn ...
+labgob warning: Decoding into a non-default variable/field Term may not work

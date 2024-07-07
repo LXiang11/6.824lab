@@ -2,6 +2,7 @@ package shardctrler
 
 import (
 	"bytes"
+	"log"
 	"sort"
 	"sync"
 	"sync/atomic"
@@ -11,6 +12,15 @@ import (
 	"6.5840/labrpc"
 	"6.5840/raft"
 )
+
+const Debug = false
+
+func DPrintf(format string, a ...interface{}) (n int, err error) {
+	if Debug {
+		log.Printf(format, a...)
+	}
+	return
+}
 
 type ShardCtrler struct {
 	mu      sync.Mutex
@@ -38,7 +48,7 @@ type ShardCtrler struct {
 
 type Op struct {
 	// Your data here.
-	Optype  int
+	Optype  OpType
 	Servers map[int][]string
 	GIDs    []int
 	Shard   int
@@ -94,7 +104,13 @@ func (sc *ShardCtrler) ReadSnapshot(snapshot []byte) {
 
 func (sc *ShardCtrler) Join(args *JoinArgs, reply *JoinReply) {
 	// Your code here.
-	op := Op{0, args.Servers, nil, 0, 0, 0, args.ClerkID, args.SeqlID}
+	// op := Op{0, args.Servers, nil, 0, 0, 0, args.ClerkID, args.SeqlID}
+	op := Op{
+		Optype:  Join,
+		Servers: args.Servers,
+		ClerkID: args.ClerkID,
+		SeqlID:  args.SeqlID,
+	}
 	index, term, isleader := sc.rf.Start(op)
 	if !isleader {
 		reply.WrongLeader = true
@@ -124,7 +140,13 @@ func (sc *ShardCtrler) Join(args *JoinArgs, reply *JoinReply) {
 
 func (sc *ShardCtrler) Leave(args *LeaveArgs, reply *LeaveReply) {
 	// Your code here.
-	op := Op{1, nil, args.GIDs, 0, 0, 0, args.ClerkID, args.SeqlID}
+	// op := Op{1, nil, args.GIDs, 0, 0, 0, args.ClerkID, args.SeqlID}
+	op := Op{
+		Optype:  Leave,
+		GIDs:    args.GIDs,
+		ClerkID: args.ClerkID,
+		SeqlID:  args.SeqlID,
+	}
 	index, term, isleader := sc.rf.Start(op)
 	if !isleader {
 		reply.WrongLeader = true
@@ -154,7 +176,14 @@ func (sc *ShardCtrler) Leave(args *LeaveArgs, reply *LeaveReply) {
 
 func (sc *ShardCtrler) Move(args *MoveArgs, reply *MoveReply) {
 	// Your code here.
-	op := Op{2, nil, nil, args.Shard, args.GID, 0, args.ClerkID, args.SeqlID}
+	// op := Op{2, nil, nil, args.Shard, args.GID, 0, args.ClerkID, args.SeqlID}
+	op := Op{
+		Optype:  Move,
+		Shard:   args.Shard,
+		GID:     args.GID,
+		ClerkID: args.ClerkID,
+		SeqlID:  args.SeqlID,
+	}
 	index, term, isleader := sc.rf.Start(op)
 	if !isleader {
 		reply.WrongLeader = true
@@ -184,7 +213,13 @@ func (sc *ShardCtrler) Move(args *MoveArgs, reply *MoveReply) {
 
 func (sc *ShardCtrler) Query(args *QueryArgs, reply *QueryReply) {
 	// Your code here.
-	op := Op{3, nil, nil, 0, 0, args.Num, args.ClerkID, args.SeqlID}
+	// op := Op{3, nil, nil, 0, 0, args.Num, args.ClerkID, args.SeqlID}
+	op := Op{
+		Optype:  Query,
+		Num:     args.Num,
+		ClerkID: args.ClerkID,
+		SeqlID:  args.SeqlID,
+	}
 	index, term, isleader := sc.rf.Start(op)
 	if !isleader {
 		reply.WrongLeader = true
@@ -256,54 +291,64 @@ func (sc *ShardCtrler) gettarget_c(group_c int, list [][2]int) map[int]int {
 
 func (sc *ShardCtrler) applyCommandOnServer(op Op) Config {
 	lastSeqID, ok := sc.ClerklastSeqID[op.ClerkID]
-	if ok && lastSeqID >= op.SeqlID && op.Optype < 3 {
+	if ok && lastSeqID >= op.SeqlID && op.Optype != Query {
+		//过滤旧请求
 		return Config{}
 	}
 	sc.ClerklastSeqID[op.ClerkID] = max(lastSeqID, op.SeqlID)
 	lastconfig := sc.configs[len(sc.configs)-1]
-	newconfig := Config{lastconfig.Num + 1, lastconfig.Shards, make(map[int][]string, 0)}
-	if op.Optype == 0 {
-		shard_c := sc.getshard_c(lastconfig.Shards)
-		shard_c_list := make([][2]int, 0)
+	newconfig := Config{
+		Num:    lastconfig.Num + 1,
+		Shards: lastconfig.Shards,
+		Groups: make(map[int][]string, 0),
+	}
+	if op.Optype == Join {
+		//Join
+		DPrintf("%d Join %v seqid %d", sc.me, op.Servers, op.SeqlID)
+		gid2shard_cnt := sc.getshard_c(lastconfig.Shards)
+		gid_shard_c_list := make([][2]int, 0)
 		//添加已有的副本组
 		for gid, servers := range lastconfig.Groups {
 			//排除无效组
 			if gid == 0 {
 				continue
 			}
-			c := shard_c[gid]
-			shard_c_list = append(shard_c_list, [2]int{gid, c})
+			c := gid2shard_cnt[gid]
+			gid_shard_c_list = append(gid_shard_c_list, [2]int{gid, c})
 			newconfig.Groups[gid] = servers
 		}
 		//添加新的副本组
 		for gid, servers := range op.Servers {
 			newconfig.Groups[gid] = servers
-			shard_c_list = append(shard_c_list, [2]int{gid, 0})
+			gid_shard_c_list = append(gid_shard_c_list, [2]int{gid, 0})
 		}
 		//根据分片数排序
-		sort.Slice(shard_c_list, func(i, j int) bool {
-			return shard_c_list[i][1] < shard_c_list[j][1] ||
-				(shard_c_list[i][1] == shard_c_list[j][1] && shard_c_list[i][0] < shard_c_list[j][0])
+		sort.Slice(gid_shard_c_list, func(i, j int) bool {
+			return gid_shard_c_list[i][1] < gid_shard_c_list[j][1] ||
+				(gid_shard_c_list[i][1] == gid_shard_c_list[j][1] && gid_shard_c_list[i][0] < gid_shard_c_list[j][0])
 		})
 		//副本组数量
-		group_c := len(shard_c_list)
+		group_c := len(gid_shard_c_list)
 		//每个副本组的目标分片数
-		target_c := sc.gettarget_c(group_c, shard_c_list)
+		target_c := sc.gettarget_c(group_c, gid_shard_c_list)
 		for shard_c_list_i, shard_i := 0, 0; shard_i < NShards; shard_i++ {
 			//当前分片所属的副本组
 			curgid := newconfig.Shards[shard_i]
 			//如果当前分片所属的副本组分片数大于它的目标分片数或者该分片属于无效组，则再分配
-			if shard_c[curgid] > target_c[curgid] || curgid == 0 {
+			if curgid == 0 || gid2shard_cnt[curgid] > target_c[curgid] {
 				//如果当前副本组已分配满，则指向下一个
-				for shard_c_list[shard_c_list_i][1] >= target_c[shard_c_list[shard_c_list_i][0]] {
+				for gid_shard_c_list[shard_c_list_i][1] >= target_c[gid_shard_c_list[shard_c_list_i][0]] {
 					shard_c_list_i++
 				}
-				shard_c_list[shard_c_list_i][1]++
-				shard_c[curgid]--
-				newconfig.Shards[shard_i] = shard_c_list[shard_c_list_i][0]
+				gid_shard_c_list[shard_c_list_i][1]++
+				gid2shard_cnt[curgid]--
+				//更新分片所属副本组
+				newconfig.Shards[shard_i] = gid_shard_c_list[shard_c_list_i][0]
 			}
 		}
-	} else if op.Optype == 1 {
+	} else if op.Optype == Leave {
+		//Leave
+		DPrintf("%d Leave %v seqid %d", sc.me, op.GIDs, op.SeqlID)
 		shard_c := sc.getshard_c(lastconfig.Shards)
 		remain_list := make([][2]int, 0)
 		delete_dict := make(map[int]bool)
@@ -335,6 +380,7 @@ func (sc *ShardCtrler) applyCommandOnServer(op Op) Config {
 			if ok {
 				//如果不存在副本组，则全部放入无效组
 				if group_c > 0 {
+					//选择一个副本组分配
 					for remain_list[remain_list_i][1] >= target_c[remain_list[remain_list_i][0]] {
 						remain_list_i++
 					}
@@ -345,15 +391,20 @@ func (sc *ShardCtrler) applyCommandOnServer(op Op) Config {
 				}
 			}
 		}
-	} else if op.Optype == 2 {
+	} else if op.Optype == Move {
+		//Move
+		DPrintf("%d Move shard %d to gid %d seqid %d", sc.me, op.Shard, op.GID, op.SeqlID)
 		for gid, servers := range lastconfig.Groups {
 			newconfig.Groups[gid] = servers
 		}
 		newconfig.Shards[op.Shard] = op.GID
-	} else if op.Optype == 3 {
+	} else if op.Optype == Query {
+		//Query
 		if op.Num == -1 || op.Num >= len(sc.configs) {
+			DPrintf("%d Query cfg %v seqid %d", sc.me, lastconfig, op.SeqlID)
 			return lastconfig
 		} else {
+			DPrintf("%d Query cfg %v seqid %d", sc.me, sc.configs[op.Num], op.SeqlID)
 			return sc.configs[op.Num]
 		}
 	}
@@ -372,17 +423,17 @@ func (sc *ShardCtrler) applyCommandOnServer(op Op) Config {
 
 func (sc *ShardCtrler) applyCommand() {
 	for sc.killed() == false {
-		for m := range sc.applyCh {
+		select {
+		case m := <-sc.applyCh:
 			if m.CommandValid {
 				//类型断言
 				op := m.Command.(Op)
-				// DPrintf("1 server%v applycmd key: %v, value: %v, type: %v, opindex: %v\n",
-				// 	sc.me, m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, m.Command.(Op).Opindex)
+				DPrintf("%d accept msg index %d op %v", sc.me, m.CommandIndex, op)
 				sc.mu.Lock()
-				if sc.maxexcuteindex >= m.CommandIndex {
-					sc.mu.Unlock()
-					continue
-				}
+				// if sc.maxexcuteindex >= m.CommandIndex {
+				// 	sc.mu.Unlock()
+				// 	continue
+				// }
 				response := sc.applyCommandOnServer(op)
 				currentterm, isleader := sc.rf.GetState()
 				waitchannel, waitok := sc.waitreply[OpIdentifier{m.CommandIndex, currentterm}]
@@ -393,7 +444,8 @@ func (sc *ShardCtrler) applyCommand() {
 				}
 				if !waitok || !isleader {
 					sc.mu.Unlock()
-					continue
+					// continue
+					break
 				}
 				waitchannel <- response
 
@@ -401,16 +453,56 @@ func (sc *ShardCtrler) applyCommand() {
 				// DPrintf("11 server%v applycmd key: %v, value: %v, type: %v, opindex: %v\n",
 				// 	sc.me, m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, m.Command.(Op).Opindex)
 			} else if m.SnapshotValid {
-				// sc.mu.Lock()
+				DPrintf("%d load snapshot index %d", sc.me, m.SnapshotIndex)
+				sc.mu.Lock()
 				// if sc.maxexcuteindex >= m.SnapshotIndex {
 				// 	sc.mu.Unlock()
 				// 	continue
 				// }
-				// //更新状态
-				// sc.ReadSnapshot(m.Snapshot)
-				// sc.mu.Unlock()
+				//更新状态
+				sc.ReadSnapshot(m.Snapshot)
+				sc.mu.Unlock()
 			}
 		}
+		// for m := range sc.applyCh {
+		// 	if m.CommandValid {
+		// 		//类型断言
+		// 		op := m.Command.(Op)
+		// 		DPrintf("%d accept msg index %d op %v", sc.me, m.CommandIndex, op)
+		// 		sc.mu.Lock()
+		// 		// if sc.maxexcuteindex >= m.CommandIndex {
+		// 		// 	sc.mu.Unlock()
+		// 		// 	continue
+		// 		// }
+		// 		response := sc.applyCommandOnServer(op)
+		// 		currentterm, isleader := sc.rf.GetState()
+		// 		waitchannel, waitok := sc.waitreply[OpIdentifier{m.CommandIndex, currentterm}]
+		// 		sc.maxexcuteindex = int(max(int64(m.CommandIndex), int64(sc.maxexcuteindex)))
+		// 		// fmt.Println("me", sc.me, "raftstatesize: ", sc.persister.RaftStateSize())
+		// 		if sc.maxraftstate > -1 && int(float64(sc.maxraftstate)*0.8) < sc.persister.RaftStateSize() {
+		// 			sc.Snapshot()
+		// 		}
+		// 		if !waitok || !isleader {
+		// 			sc.mu.Unlock()
+		// 			continue
+		// 		}
+		// 		waitchannel <- response
+
+		// 		sc.mu.Unlock()
+		// 		// DPrintf("11 server%v applycmd key: %v, value: %v, type: %v, opindex: %v\n",
+		// 		// 	sc.me, m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, m.Command.(Op).Opindex)
+		// 	} else if m.SnapshotValid {
+		// 		DPrintf("%d load snapshot index %d", sc.me, m.SnapshotIndex)
+		// 		sc.mu.Lock()
+		// 		// if sc.maxexcuteindex >= m.SnapshotIndex {
+		// 		// 	sc.mu.Unlock()
+		// 		// 	continue
+		// 		// }
+		// 		//更新状态
+		// 		sc.ReadSnapshot(m.Snapshot)
+		// 		sc.mu.Unlock()
+		// 	}
+		// }
 	}
 }
 

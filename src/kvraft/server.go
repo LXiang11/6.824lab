@@ -35,7 +35,7 @@ type Op struct {
 	// Your definitions here.
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
-	Optype  int
+	Optype  OpType
 	Key     string
 	Value   string
 	ClerkID int64
@@ -106,8 +106,14 @@ func (kv *KVServer) ReadSnapshot(snapshot []byte) {
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
-	DPrintf("1 server%v get %v", kv.me, args.Key)
-	op := Op{0, args.Key, "", args.ClerkID, args.SeqID}
+	DPrintf("server %v get %v", kv.me, args.Key)
+	// op := Op{0, args.Key, "", args.ClerkID, args.SeqID}
+	op := Op{
+		Optype:  _Get,
+		Key:     args.Key,
+		ClerkID: args.ClerkID,
+		SeqlID:  args.SeqID,
+	}
 	index, term, isleader := kv.rf.Start(op)
 	if !isleader {
 		reply.Err = ErrWrongLeader
@@ -129,6 +135,7 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	case value := <-response:
 		reply.Err = OK
 		reply.Value = value
+		DPrintf("me %d get key %v success", kv.me, args.Key)
 		return
 	case <-time.After(time.Duration(Timeout)):
 		reply.Err = ErrWrongLeader
@@ -138,12 +145,26 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	// Your code here.
-	// DPrintf("1 server%v putappend %v, value %v", kv.me, args.Key, args.Value)
+	DPrintf("server %v putappend %v, value %v", kv.me, args.Key, args.Value)
 	var op Op
 	if args.Op == "Put" {
-		op = Op{1, args.Key, args.Value, args.ClerkID, args.SeqID}
+		// op = Op{1, args.Key, args.Value, args.ClerkID, args.SeqID}
+		op = Op{
+			Optype:  _Put,
+			Key:     args.Key,
+			Value:   args.Value,
+			ClerkID: args.ClerkID,
+			SeqlID:  args.SeqID,
+		}
 	} else if args.Op == "Append" {
-		op = Op{2, args.Key, args.Value, args.ClerkID, args.SeqID}
+		// op = Op{2, args.Key, args.Value, args.ClerkID, args.SeqID}
+		op = Op{
+			Optype:  _Append,
+			Key:     args.Key,
+			Value:   args.Value,
+			ClerkID: args.ClerkID,
+			SeqlID:  args.SeqID,
+		}
 	}
 	index, term, isleader := kv.rf.Start(op)
 	if !isleader {
@@ -165,6 +186,7 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	select {
 	case <-response:
 		reply.Err = OK
+		DPrintf("me %d putappend key %v success", kv.me, args.Key)
 		return
 	case <-time.After(time.Duration(Timeout)):
 		reply.Err = ErrWrongLeader
@@ -193,22 +215,22 @@ func (kv *KVServer) killed() bool {
 
 func (kv *KVServer) applyCommandOnServer(op Op) string {
 	lastSeqID, ok := kv.ClerklastSeqID[op.ClerkID]
-	if ok && lastSeqID >= op.SeqlID && (op.Optype == 1 || op.Optype == 2) {
+	if ok && lastSeqID >= op.SeqlID && (op.Optype == _Put || op.Optype == _Append) {
 		return ""
 	}
 	kv.ClerklastSeqID[op.ClerkID] = max(lastSeqID, op.SeqlID)
-	if op.Optype == 0 {
+	if op.Optype == _Get {
 		//"Get"
 		value, ok := kv.store[op.Key]
 		if !ok {
 			value = ""
 		}
 		return value
-	} else if op.Optype == 1 {
+	} else if op.Optype == _Put {
 		//"Put"
 		kv.store[op.Key] = op.Value
 		return ""
-	} else if op.Optype == 2 {
+	} else if op.Optype == _Append {
 		//"Append"
 		value, ok := kv.store[op.Key]
 		if ok {
@@ -222,7 +244,8 @@ func (kv *KVServer) applyCommandOnServer(op Op) string {
 
 func (kv *KVServer) applyCommand() {
 	for kv.killed() == false {
-		for m := range kv.applyCh {
+		select {
+		case m := <-kv.applyCh:
 			if m.CommandValid {
 				DPrintf("applycmd: key: %v, value: %v, type: %v, me: %v\n",
 					m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, kv.me)
@@ -272,6 +295,56 @@ func (kv *KVServer) applyCommand() {
 				kv.mu.Unlock()
 			}
 		}
+		// for m := range kv.applyCh {
+		// 	if m.CommandValid {
+		// 		DPrintf("applycmd: key: %v, value: %v, type: %v, me: %v\n",
+		// 			m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, kv.me)
+		// 		//类型断言
+		// 		op := m.Command.(Op)
+		// 		// DPrintf("1 server%v applycmd key: %v, value: %v, type: %v, opindex: %v\n",
+		// 		// 	kv.me, m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, m.Command.(Op).Opindex)
+		// 		kv.mu.Lock()
+		// 		if kv.maxexcuteindex >= m.CommandIndex {
+		// 			kv.mu.Unlock()
+		// 			continue
+		// 		}
+		// 		response := kv.applyCommandOnServer(op)
+		// 		currentterm, isleader := kv.rf.GetState()
+		// 		waitchannel, waitok := kv.waitreply[OpIdentifier{m.CommandIndex, currentterm}]
+		// 		kv.maxexcuteindex = int(max(int64(m.CommandIndex), int64(kv.maxexcuteindex)))
+		// 		// fmt.Println("me", kv.me, "raftstatesize: ", kv.persister.RaftStateSize())
+		// 		if kv.maxraftstate > -1 && int(float64(kv.maxraftstate)*0.8) < kv.persister.RaftStateSize() {
+		// 			kv.Snapshot()
+		// 		}
+		// 		if !waitok || !isleader {
+		// 			kv.mu.Unlock()
+		// 			continue
+		// 		}
+		// 		waitchannel <- response
+
+		// 		kv.mu.Unlock()
+		// 		// DPrintf("11 server%v applycmd key: %v, value: %v, type: %v, opindex: %v\n",
+		// 		// 	kv.me, m.Command.(Op).Key, m.Command.(Op).Value, m.Command.(Op).Optype, m.Command.(Op).Opindex)
+		// 	} else if m.SnapshotValid {
+		// 		kv.mu.Lock()
+		// 		// if kv.snapshotlastterm > m.SnapshotTerm {
+		// 		// 	kv.mu.Unlock()
+		// 		// 	continue
+		// 		// } else if kv.snapshotlastterm == m.SnapshotTerm {
+		// 		// 	if kv.snapshotlastindex >= m.SnapshotIndex {
+		// 		// 		kv.mu.Unlock()
+		// 		// 		continue
+		// 		// 	}
+		// 		// } else
+		// 		if kv.maxexcuteindex >= m.SnapshotIndex {
+		// 			kv.mu.Unlock()
+		// 			continue
+		// 		}
+		// 		//更新状态
+		// 		kv.ReadSnapshot(m.Snapshot)
+		// 		kv.mu.Unlock()
+		// 	}
+		// }
 	}
 }
 
@@ -309,7 +382,7 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	// You may need initialization code here.
 	go kv.applyCommand()
 
-	DPrintf("server %v get start!\n", me)
+	DPrintf("server %v start!\n", me)
 
 	return kv
 }

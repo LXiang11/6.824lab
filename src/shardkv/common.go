@@ -18,6 +18,28 @@ const (
 
 type Err string
 
+type OpType int
+
+const (
+	Get OpType = iota
+	Put
+	Append
+	ConfigChange
+	ShardStateChange
+	AccpetShard
+	Nop
+)
+
+type ShardState int
+
+const (
+	NotHold ShardState = iota
+	Hold
+	WaitPush
+	Push
+	WaitGet
+)
+
 // Put or Append
 type PutAppendArgs struct {
 	// You'll have to add definitions here.
